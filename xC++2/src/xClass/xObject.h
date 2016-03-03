@@ -11,6 +11,12 @@
 class xObject {
 public:
 	xObject();
+
+	xJson* serialize();
+	bool deserialize (xJson*);
+	char* getClassName();
+	long getId();
+
 	virtual ~xObject();
 };
 

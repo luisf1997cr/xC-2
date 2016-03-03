@@ -7,6 +7,14 @@
 
 #include "xObject.h"
 
+
+
+xJson* serialize(){}
+bool deserialize (xJson*){}
+char* getClassName(){}
+long getId(){}
+
+
 xObject::xObject() {
 	// TODO Auto-generated constructor stub
 
