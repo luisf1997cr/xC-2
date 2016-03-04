@@ -29,6 +29,7 @@ class lista {
     void Ultimo();
     bool Actual() { return plista != NULL; }
     int ValorActual() { return plista->valor; }
+    int buscar(int ptr);
 
    private:
     pnodo plista;
@@ -89,6 +90,34 @@ void lista::Borrar(int v)
    delete nodo;
 }
 
+
+int lista::buscar(int ptr) {
+	pnodo hasta;
+	hasta= plista;
+	Primero();
+	pnodo nodo = plista;
+	cout << "AQUII"<< endl;
+
+	cout << nodo->valor<< endl;
+
+
+	while (ptr != nodo->valor) {
+		nodo = nodo->siguiente;
+		cout << "Este : "<< nodo->valor << endl;
+
+		if (nodo != plista->siguiente) {
+			cout << "AQUII2"<< endl;
+			return nodo->valor;
+
+		} else {
+			cout << "NO ESTA" << endl;
+			return 0;
+		}}
+
+	return 0;
+}
+
+
 void lista::Mostrar(int orden)
 {
    pnodo nodo;
@@ -147,17 +176,15 @@ int main()
    cout << "Primero: " << Lista.ValorActual() << endl;
 
    Lista.Ultimo();
-   cout << "Ultimo: " << Lista.ValorActual() << endl;
 
-   Lista.Borrar(10);
-   Lista.Borrar(15);
-   Lista.Borrar(45);
+   cout << "Ultimo: " << Lista.ValorActual() << endl;
+   cout << "BUSCANDO: " << Lista.buscar(10)<< endl;
+
    Lista.Borrar(40);
 
    Lista.Mostrar(ASCENDENTE);
    Lista.Mostrar(DESCENDENTE);
 
-   cin.get();
    return 0;
 
 
