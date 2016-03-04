@@ -7,7 +7,7 @@
 
 #include "NodoSimple.h"
 
-NodoSimple::NodoSimple(string clave, NodoSimple * siguiente,T* dato) {
+NodoSimple::NodoSimple(string clave, NodoSimple * siguiente) {
 	// TODO Auto-generated constructor stub
 
 	key = clave;
