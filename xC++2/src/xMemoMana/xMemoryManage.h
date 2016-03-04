@@ -8,13 +8,16 @@
 #ifndef SRC_XMEMOMANA_XMEMORYMANAGE_H_
 #define SRC_XMEMOMANA_XMEMORYMANAGE_H_
 
+/*
+ *
+ */
+
 class xMemoryManage {
 protected:
 
-	int memprogra = 200; //Entero de cantidad de memoria
+	int memprogra = 200; //Entero de cantidad de memoria que se pasa desde archivo de configuracion
 	int memprograusada =0; //Entero de cantidad de memoria que se ha usado
 	char* PROGRAMMEMORY = malloc(memprogra); // Puntero de inicializacion de toda la memoria a utilizar
-
 
 
 public:
