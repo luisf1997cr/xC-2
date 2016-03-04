@@ -13,6 +13,7 @@
  */
 
 class xMemoryManage {
+	/*
 protected:
 
 	int memprogra = 200; //Entero de cantidad de memoria que se pasa desde archivo de configuracion
@@ -25,6 +26,7 @@ public:
 
 	xMemoryManage();
 	virtual ~xMemoryManage();
+	**/
 };
 
 #endif /* SRC_XMEMOMANA_XMEMORYMANAGE_H_ */

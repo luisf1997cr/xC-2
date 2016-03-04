@@ -8,7 +8,7 @@
 #include "xPointer.h"
 
 
-
+/*
 xPointer::xPointer() {
 	// TODO Auto-generated constructor stub
 
@@ -18,3 +18,4 @@ xPointer::~xPointer() {
 	// TODO Auto-generated destructor stub
 }
 
+**/

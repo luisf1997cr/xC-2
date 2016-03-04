@@ -7,7 +7,7 @@
 
 #include "xMemoryOperators.h"
 
-
+/*
 
 void* operator new(std::size_t sz) {
     std::printf("global op new called, size = %zu\n",sz);
@@ -23,6 +23,8 @@ void operator delete(void* ptr) noexcept
 void operator + (){
 
 }
+
+**/
 
 xMemoryOperators::xMemoryOperators() {
 	// TODO Auto-generated constructor stub

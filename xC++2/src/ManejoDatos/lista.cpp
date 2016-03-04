@@ -6,25 +6,13 @@
  */
 #include <iostream>
 #include <stdlib.h>
+#include "Nodo.h"
 using namespace std;
 
 #define ASCENDENTE 1
 #define DESCENDENTE 0
 
-class nodo {
-   public:
-    nodo(int v, nodo *sig = NULL, nodo *ant = NULL) :
-       valor(v), siguiente(sig), anterior(ant) {}
-
-   private:
-    int valor;
-    nodo *siguiente;
-    nodo *anterior;
-
-   friend class lista;
-};
-
-typedef nodo *pnodo;
+typedef Nodo *pnodo;
 
 class lista {
    public:
@@ -67,7 +55,7 @@ void lista::Insertar(int v)
    if(ListaVacia() || plista->valor > v) {
       // Asignamos a lista un nuevo nodo de valor v y
       // cuyo siguiente elemento es la lista actual
-      nuevo = new nodo(v, plista);
+      nuevo = new Nodo(v, plista);
       if(!plista) plista = nuevo;
       else plista->anterior = nuevo;
    }
@@ -77,7 +65,7 @@ void lista::Insertar(int v)
       // un valor mayor que v
       while(plista->siguiente && plista->siguiente->valor <= v) Siguiente();
       // Creamos un nuevo nodo despu�s del nodo actual
-      nuevo = new nodo(v, plista->siguiente, plista);
+      nuevo = new Nodo(v, plista->siguiente, plista);
       plista->siguiente = nuevo;
       if(nuevo->siguiente) nuevo->siguiente->anterior = nuevo;
    }
@@ -148,7 +136,7 @@ int main()
    lista Lista;
 
    Lista.Insertar(20);
-   Lista.Insertar(10);
+   Lista.Insertar(80);
    Lista.Insertar(40);
    Lista.Insertar(30);
 

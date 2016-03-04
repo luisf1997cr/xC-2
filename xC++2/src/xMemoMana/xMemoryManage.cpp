@@ -6,7 +6,7 @@
  */
 
 #include "xMemoryManage.h"
-
+/*
 void xCalloc (int size){
 
 }
@@ -19,6 +19,7 @@ void* xSet(bool type, xPointer * ptr){
 
 }
 
+
 xMemoryManage::xMemoryManage() {
 	// TODO Auto-generated constructor stub
 
@@ -28,3 +29,4 @@ xMemoryManage::~xMemoryManage() {
 	// TODO Auto-generated destructor stub
 }
 
+**/
