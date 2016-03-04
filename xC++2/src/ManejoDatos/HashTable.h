@@ -36,7 +36,7 @@ public:
     HashTable( int tableLength = 13 );
 
     // Adds an item to the Hash Table.
-    void insertItem( Item * newItem );
+    void insertItem( NodoSimple * newItem );
 
     // Deletes an Item by key from the Hash Table.
     // Returns true if the operation is successful.
@@ -44,7 +44,7 @@ public:
 
     // Returns an item from the Hash Table by key.
     // If the item isn't found, a null pointer is returned.
-    Item * getItemByKey( string itemKey );
+    NodoSimple * getItemByKey( string itemKey );
 
     // Display the contents of the Hash Table to console window.
     void printTable();

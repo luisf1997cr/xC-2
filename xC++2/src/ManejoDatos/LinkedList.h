@@ -15,15 +15,18 @@
 #include <string>
 using namespace std;
 
+#include "NodoSimple.h"
+
 //*****************************************************************
 // List items are keys with pointers to the next item.
 //*****************************************************************
-struct Item
+/*
+ * struct NodoSimple
 {
     string key;
-    Item * next;
+    NodoSimple * next;
 };
-
+**/
 //*****************************************************************
 // Linked lists store a variable number of items.
 //*****************************************************************
@@ -31,7 +34,7 @@ class LinkedList
 {
 private:
     // Head is a reference to a list of data nodes.
-    Item * head;
+    NodoSimple * head;
 
     // Length is the number of data nodes.
     int length;
@@ -42,7 +45,7 @@ public:
     LinkedList();
 
     // Inserts an item at the end of the list.
-    void insertItem( Item * newItem );
+    void insertItem( NodoSimple * newItem );
 
     // Removes an item from the list by item key.
     // Returns true if the operation is successful.
@@ -51,7 +54,7 @@ public:
     // Searches for an item by its key.
     // Returns a reference to first match.
     // Returns a NULL pointer if no match is found.
-    Item * getItem( string itemKey );
+    NodoSimple * getItem( string itemKey );
 
     // Displays list contents to the console window.
     void printList();

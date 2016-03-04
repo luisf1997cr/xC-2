@@ -12,32 +12,32 @@
 int main()
 {
     // Create 26 Items to store in the Hash Table.
-    Item * A = new Item {"Apple", NULL};
-    Item * B = new Item {"Banana", NULL};
-    Item * C = new Item {"Caterpillar", NULL};
-    Item * D = new Item {"Dog", NULL};
-    Item * E = new Item {"Elephant", NULL};
-    Item * F = new Item {"Fedora", NULL};
-    Item * G = new Item {"Goosebumps", NULL};
-    Item * H = new Item {"House", NULL};
-    Item * I = new Item {"Insects", NULL};
-    Item * J = new Item {"Jam", NULL};
-    Item * K = new Item {"Kite", NULL};
-    Item * L = new Item {"Limestone", NULL};
-    Item * M = new Item {"Mountaineering", NULL};
-    Item * N = new Item {"Night", NULL};
-    Item * O = new Item {"Open Sesame", NULL};
-    Item * P = new Item {"Potatoes", NULL};
-    Item * Q = new Item {"Quantum Mechanics", NULL};
-    Item * R = new Item {"Rrrrrrrrrrawr", NULL};
-    Item * S = new Item {"Snakes", NULL};
-    Item * T = new Item {"Tizzy Tube", NULL};
-    Item * U = new Item {"Underworld", NULL};
-    Item * V = new Item {"Volcanic Ash", NULL};
-    Item * W = new Item {"Who When What Why", NULL};
-    Item * X = new Item {"XXX", NULL};
-    Item * Y = new Item {"Yellow", NULL};
-    Item * Z = new Item {"Zest of Lemon", NULL};
+    NodoSimple * A = new NodoSimple {"Apple", NULL};
+    NodoSimple * B = new NodoSimple {"Banana", NULL};
+    NodoSimple * C = new NodoSimple {"Caterpillar", NULL};
+    NodoSimple * D = new NodoSimple {"Dog", NULL};
+    NodoSimple * E = new NodoSimple {"Elephant", NULL};
+    NodoSimple * F = new NodoSimple {"Fedora", NULL};
+    NodoSimple * G = new NodoSimple {"Goosebumps", NULL};
+    NodoSimple * H = new NodoSimple {"House", NULL};
+    NodoSimple * I = new NodoSimple {"Insects", NULL};
+    NodoSimple * J = new NodoSimple {"Jam", NULL};
+    NodoSimple * K = new NodoSimple {"Kite", NULL};
+    NodoSimple * L = new NodoSimple {"Limestone", NULL};
+    NodoSimple * M = new NodoSimple {"Mountaineering", NULL};
+    NodoSimple * N = new NodoSimple {"Night", NULL};
+    NodoSimple * O = new NodoSimple {"Open Sesame", NULL};
+    NodoSimple * P = new NodoSimple {"Potatoes", NULL};
+    NodoSimple * Q = new NodoSimple {"Quantum Mechanics", NULL};
+    NodoSimple * R = new NodoSimple {"Rrrrrrrrrrawr", NULL};
+    NodoSimple * S = new NodoSimple {"Snakes", NULL};
+    NodoSimple * T = new NodoSimple {"Tizzy Tube", NULL};
+    NodoSimple * U = new NodoSimple {"Underworld", NULL};
+    NodoSimple * V = new NodoSimple {"Volcanic Ash", NULL};
+    NodoSimple * W = new NodoSimple {"Who When What Why", NULL};
+    NodoSimple * X = new NodoSimple {"XXX", NULL};
+    NodoSimple * Y = new NodoSimple {"Yellow", NULL};
+    NodoSimple * Z = new NodoSimple {"Zest of Lemon", NULL};
 
     // Create a Hash Table of 13 Linked List elements.
     HashTable table;
@@ -83,7 +83,7 @@ int main()
     table.printHistogram();
 
     // Look up an item in the hash table
-    Item * result = table.getItemByKey("Snakes");
+    NodoSimple * result = table.getItemByKey("Snakes");
     cout << result -> key << endl;
     return 0;
 }

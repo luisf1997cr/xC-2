@@ -14,13 +14,13 @@
 // Creates the head node and sets length to zero.
 LinkedList::LinkedList()
 {
-    head = new Item;
+    head = new NodoSimple{"c", NULL};
     head -> next = NULL;
     length = 0;
 }
 
 // Inserts an item at the end of the list.
-void LinkedList::insertItem( Item * newItem )
+void LinkedList::insertItem( NodoSimple * newItem )
 {
     if (!head -> next)
     {
@@ -28,8 +28,8 @@ void LinkedList::insertItem( Item * newItem )
         length++;
         return;
     }
-    Item * p = head;
-    Item * q = head;
+    NodoSimple * p = head;
+    NodoSimple * q = head;
     while (q)
     {
         p = q;
@@ -45,8 +45,8 @@ void LinkedList::insertItem( Item * newItem )
 bool LinkedList::removeItem( string itemKey )
 {
     if (!head -> next) return false;
-    Item * p = head;
-    Item * q = head;
+    NodoSimple * p = head;
+    NodoSimple * q = head;
     while (q)
     {
         if (q -> key == itemKey)
@@ -65,10 +65,10 @@ bool LinkedList::removeItem( string itemKey )
 // Searches for an item by its key.
 // Returns a reference to first match.
 // Returns a NULL pointer if no match is found.
-Item * LinkedList::getItem( string itemKey )
+NodoSimple * LinkedList::getItem( string itemKey )
 {
-    Item * p = head;
-    Item * q = head;
+    NodoSimple * p = head;
+    NodoSimple * q = head;
     while (q)
     {
         p = q;
@@ -87,8 +87,8 @@ void LinkedList::printList()
         cout << "\n{ }\n";
         return;
     }
-    Item * p = head;
-    Item * q = head;
+    NodoSimple * p = head;
+    NodoSimple * q = head;
     cout << "\n{ ";
     while (q)
     {
@@ -113,8 +113,8 @@ int LinkedList::getLength()
 // De-allocates list memory when the program terminates.
 LinkedList::~LinkedList()
 {
-    Item * p = head;
-    Item * q = head;
+    NodoSimple * p = head;
+    NodoSimple * q = head;
     while (q)
     {
         p = q;

@@ -29,7 +29,7 @@ int HashTable::hash( string itemKey )
 }
 
 // Adds an item to the Hash Table.
-void HashTable::insertItem( Item * newItem )
+void HashTable::insertItem( NodoSimple * newItem )
 {
     int index = hash( newItem -> key );
     array[ index ].insertItem( newItem );
@@ -45,7 +45,7 @@ bool HashTable::removeItem( string itemKey )
 
 // Returns an item from the Hash Table by key.
 // If the item isn't found, a null pointer is returned.
-Item * HashTable::getItemByKey( string itemKey )
+NodoSimple * HashTable::getItemByKey( string itemKey )
 {
     int index = hash( itemKey );
     return array[ index ].getItem( itemKey );
