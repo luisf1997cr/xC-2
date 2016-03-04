@@ -92,29 +92,30 @@ void lista::Borrar(int v)
 
 
 int lista::buscar(int ptr) {
+
+
 	pnodo hasta;
-	hasta= plista;
-	Primero();
 	pnodo nodo = plista;
 	cout << "AQUII"<< endl;
 
 	cout << nodo->valor<< endl;
 
+	while (nodo->anterior != NULL) {
 
-	while (ptr != nodo->valor) {
-		nodo = nodo->siguiente;
-		cout << "Este : "<< nodo->valor << endl;
-
-		if (nodo != plista->siguiente) {
-			cout << "AQUII2"<< endl;
+		if (ptr != nodo->valor) {
+			nodo = nodo->anterior;
+			cout << "Este : "<< nodo->valor << endl;
+		} else {
 			return nodo->valor;
 
-		} else {
-			cout << "NO ESTA" << endl;
+		}
+	}
+	if (nodo->valor == ptr){
+		return nodo->valor;
+	}else{
+		cout << "NO ESTA" << endl;
 			return 0;
-		}}
-
-	return 0;
+	}
 }
 
 
@@ -165,7 +166,7 @@ int main()
    lista Lista;
 
    Lista.Insertar(20);
-   Lista.Insertar(80);
+   Lista.Insertar(35);
    Lista.Insertar(40);
    Lista.Insertar(30);
 
@@ -178,13 +179,14 @@ int main()
    Lista.Ultimo();
 
    cout << "Ultimo: " << Lista.ValorActual() << endl;
-   cout << "BUSCANDO: " << Lista.buscar(10)<< endl;
+   cout << "BUSCANDO: " << Lista.buscar(40)<< endl;
 
-   Lista.Borrar(40);
+   Lista.Borrar(10);
 
    Lista.Mostrar(ASCENDENTE);
    Lista.Mostrar(DESCENDENTE);
 
+   cout << "LISTO PERRITA"<< endl;
    return 0;
 
 
