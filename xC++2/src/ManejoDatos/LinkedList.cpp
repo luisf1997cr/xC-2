@@ -14,7 +14,7 @@
 // Creates the head node and sets length to zero.
 LinkedList::LinkedList()
 {
-    head = new NodoSimple{"c", NULL};
+    head = new NodoSimple{"c", NULL, NULL};
     head -> next = NULL;
     length = 0;
 }
@@ -36,6 +36,7 @@ void LinkedList::insertItem( NodoSimple * newItem )
         q = p -> next;
     }
     p -> next = newItem;
+
     newItem -> next = NULL;
     length++;
 }
@@ -95,7 +96,7 @@ void LinkedList::printList()
         p = q;
         if (p != head)
         {
-            cout << p -> key;
+            cout << p -> val; //AQUI CAMBIE KEY POR VAL
             if (p -> next) cout << ", ";
             else cout << " ";
         }

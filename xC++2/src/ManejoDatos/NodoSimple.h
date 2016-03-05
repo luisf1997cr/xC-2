@@ -10,15 +10,16 @@
 
 #include <iostream>
 #include <string>
+
 using namespace std;
 
 class NodoSimple {
 public:
 	string key;
-
+	void* val;
 	NodoSimple * next;
 
-	NodoSimple(string clave, NodoSimple * siguiente);
+	NodoSimple(string clave, void* val, NodoSimple * siguiente);
 	virtual ~NodoSimple();
 };
 
