@@ -133,7 +133,7 @@ bool LinkedList<AnyType>::removeItem( string itemKey )
         if (q -> key == itemKey)
         {
             p -> next = q -> next;
-            delete q;
+            free (q);
             length--;
             return true;
         }

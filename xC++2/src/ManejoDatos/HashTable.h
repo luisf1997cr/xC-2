@@ -105,12 +105,6 @@ void HashTable<AnyType>::insertItem( NodoSimple<AnyType> * newItem )
     array[ index ].insertItem( newItem );
 }
 
-template<class AnyType>
-void HashTable<AnyType>::insertItem(AnyType* pItem){
-	NodoSimple<AnyType> *nodo = new NodoSimple<AnyType>{"c", pItem, NULL};
-	this->insertItem(nodo);
-}
-
 // Deletes an Item by key from the Hash Table.
 // Returns true if the operation is successful.
 template<class AnyType>
