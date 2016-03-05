@@ -13,14 +13,29 @@
 
 using namespace std;
 
+template <class AnyType>
 class NodoSimple {
 public:
 	string key;
-	void* val;
+	AnyType* val;
 	NodoSimple * next;
 
-	NodoSimple(string clave, void* val, NodoSimple * siguiente);
+	NodoSimple(string clave, AnyType* valor, NodoSimple * siguiente);
 	virtual ~NodoSimple();
 };
+
+template <class AnyType>
+NodoSimple<AnyType>::NodoSimple(string clave, AnyType* valor, NodoSimple* siguiente){
+	key = clave;
+	val = valor;
+	next = siguiente;
+}
+
+template<class AnyType>
+NodoSimple<AnyType>::~NodoSimple() {
+	key.erase();
+	delete val;
+	delete next;
+}
 
 #endif /* SRC_MANEJODATOS_NODOSIMPLE_H_ */
