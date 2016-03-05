@@ -45,7 +45,7 @@ public:
     LinkedList();
 
     // Inserts an item at the end of the list.
-    void insertItem( NodoSimple * newItem );
+    void insertItem( NodoSimple * newItem);
 
     // Removes an item from the list by item key.
     // Returns true if the operation is successful.
