@@ -10,7 +10,7 @@
 using namespace std;
 
 int leer() {
-	    ifstream myfile("ga.txt");
+	    ifstream myfile("prueba.txt", std::ifstream::in);
 		if (myfile.is_open()){
 			 string s;
 			  while(getline(myfile,s)){
@@ -26,7 +26,7 @@ int leer() {
 }
 
 int escribir() {
-	    ofstream myfile("ga.txt");
+	    ofstream myfile("prueba.txt");
 		if (myfile.is_open()){
 			 string s;
 
@@ -39,13 +39,15 @@ int escribir() {
 		}
 	return 0;
 }
+/*
+int main(){
 
-Ficheros::Ficheros() {
-	// TODO Auto-generated constructor stub
+	int helado = leer();
+	int vainilla = escribir();
 
+	cout << helado<< endl;
+	cout << vainilla<< endl;
+
+	return 0;
 }
-
-Ficheros::~Ficheros() {
-	// TODO Auto-generated destructor stub
-}
-
+*/
