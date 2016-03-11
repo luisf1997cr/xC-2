@@ -7,10 +7,15 @@
 
 #include "Ficheros.h"
 
+#include <iostream>
+#include <fstream>
+#include <stdio.h>
+#include <string.h>
+
 using namespace std;
 
-int leer() {
-	    ifstream myfile("prueba.txt", std::ifstream::in);
+int Ficheros::leer(char nameArchive[]) {
+	    ifstream myfile(nameArchive, std::ifstream::in);
 		if (myfile.is_open()){
 			 string s;
 			  while(getline(myfile,s)){
@@ -25,8 +30,8 @@ int leer() {
 	return 0;
 }
 
-int escribir() {
-	    ofstream myfile("prueba.txt");
+int Ficheros::escribir(char nameArchive[]) {
+	    ofstream myfile(nameArchive);
 		if (myfile.is_open()){
 			 string s;
 
@@ -40,7 +45,7 @@ int escribir() {
 	return 0;
 }
 
-bool contiene (char *lineadiv)
+bool Ficheros::contiene (char lineadiv[])
 {
 	std::cout<<"aqui"<<std::endl;
 	char * pch;
@@ -52,15 +57,11 @@ bool contiene (char *lineadiv)
 	std::cout<<"nopa"<<std::endl;
 	return false;
 }
-/*
-int main(){
 
-	int helado = leer();
-	int vainilla = escribir();
+Ficheros::Ficheros(){
 
-	cout << helado<< endl;
-	cout << vainilla<< endl;
-
-	return 0;
 }
-*/
+Ficheros::~Ficheros(){
+
+}
+

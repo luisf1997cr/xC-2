@@ -16,6 +16,9 @@
 class Ficheros {
 public:
 	Ficheros();
+	bool contiene(char line[]);
+	int leer(char nameArchive[]);
+	int escribir(char nameArchive[]);
 	virtual ~Ficheros();
 };
 
