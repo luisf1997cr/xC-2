@@ -39,6 +39,19 @@ int escribir() {
 		}
 	return 0;
 }
+
+bool contiene (char *lineadiv)
+{
+	std::cout<<"aqui"<<std::endl;
+	char * pch;
+	pch = strstr(lineadiv, "//x include" );
+	if (pch != NULL){
+		std::cout<<"sipa"<<std::endl;
+		return true;
+	}
+	std::cout<<"nopa"<<std::endl;
+	return false;
+}
 /*
 int main(){
 
