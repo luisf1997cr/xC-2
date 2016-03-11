@@ -13,10 +13,12 @@
 #include <iostream>
 #include <fstream>
 #include <string.h>
+#include "Ficheros.h"
 
 int main()
 {
 
+	/*
 	void* n = malloc(9);
 	void* m = malloc(3);
 	void* o = malloc(8);
@@ -48,5 +50,17 @@ int main()
 
 	NodoSimple<void*> * result = table->getItemByKey("Banana");
 	cout << result -> val << endl;
+	**/
+
+	char st[] = "int y //x include";
+	char sd[] = "int y";
+
+	Ficheros m;
+
+	bool c= m.contiene(sd);
+
+	cout << c<<endl;
+
+
 	return 0;
 }
