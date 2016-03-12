@@ -14,8 +14,8 @@
 
 using namespace std;
 
-int Ficheros::leer(char nameArchive[]) {
-	    ifstream myfile(nameArchive, std::ifstream::in);
+int Ficheros::leerEnFichero(char pnameArchive[]) {
+	    ifstream myfile(pnameArchive, std::ifstream::in);
 		if (myfile.is_open()){
 			 string s;
 			  while(getline(myfile,s)){
@@ -30,8 +30,8 @@ int Ficheros::leer(char nameArchive[]) {
 	return 0;
 }
 
-int Ficheros::escribir(char nameArchive[]) {
-	    ofstream myfile(nameArchive);
+int Ficheros::escribirEnFichero(char pnameArchive[]) {
+	    ofstream myfile(pnameArchive);
 		if (myfile.is_open()){
 			 string s;
 
@@ -45,17 +45,40 @@ int Ficheros::escribir(char nameArchive[]) {
 	return 0;
 }
 
-bool Ficheros::contiene (char lineadiv[])
+bool Ficheros::cadenaDentroDeOtra (char plineadiv[], char pBuscar[])
 {
-	std::cout<<"aqui"<<std::endl;
 	char * pch;
-	pch = strstr(lineadiv, "//x include" );
+	pch = strstr(plineadiv, pBuscar);
 	if (pch != NULL){
-		std::cout<<"sipa"<<std::endl;
+		std::cout<<"Si se encuentra"<<std::endl;
 		return true;
 	}
-	std::cout<<"nopa"<<std::endl;
+	std::cout<<"No se encuentra"<<std::endl;
 	return false;
+}
+
+char* Ficheros::extraerParametrosInclude (char pline[], int plarge)
+{
+	int i=0;
+	cout << pline<<endl;
+
+	int y = strlen(pline)-plarge;
+
+	static char NuevoCharLine[15];
+
+	cout<< y <<endl;
+
+	while(i<y){
+		NuevoCharLine[i] = pline[i];
+		i = i+1;
+	}
+	cout<< "sali" <<endl;
+	NuevoCharLine[y] = 0;
+
+	cout<< NuevoCharLine<<endl;
+
+	return NuevoCharLine;
+
 }
 
 Ficheros::Ficheros(){

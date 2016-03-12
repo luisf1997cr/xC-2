@@ -85,6 +85,7 @@ HashTable<AnyType>::HashTable( int tableLength )
     if (tableLength <= 0) tableLength = 13;
     array = new LinkedList<AnyType>[ tableLength ];
     length = tableLength;
+
 }
 
 // Returns an array location for a given item key.

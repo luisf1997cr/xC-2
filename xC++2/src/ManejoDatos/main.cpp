@@ -53,14 +53,14 @@ int main()
 	**/
 
 	char st[] = "int y //x include";
-	char sd[] = "int y";
+	char sd[] = "//x include";
 
 	Ficheros m;
 
-	bool c= m.contiene(sd);
-
-	cout << c<<endl;
-
+	char* p = m.extraerParametrosInclude(st, 12);
+	cout << "l" <<endl;
+	cout << p <<endl;
+	cout << "k" <<endl;
 
 	return 0;
 }
