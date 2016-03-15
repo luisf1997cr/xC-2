@@ -15,4 +15,3 @@ xObject::xObject() {
 xObject::~xObject() {
 	// TODO Auto-generated destructor stub
 }
-

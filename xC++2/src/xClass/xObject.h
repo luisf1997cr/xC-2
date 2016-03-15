@@ -7,7 +7,7 @@
 
 #ifndef SRC_XCLASS_XOBJECT_H_
 #define SRC_XCLASS_XOBJECT_H_
-
+#include "ID.h"
 class xObject {
 public:
 	xObject();
@@ -15,7 +15,7 @@ public:
 	xJson* serialize();
 	bool deserialize (xJson*);
 */	char* getClassName(void);
-	long getId();
+	ID valorID;
 	virtual ~xObject();
 };
 
