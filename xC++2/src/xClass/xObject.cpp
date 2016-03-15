@@ -6,12 +6,3 @@
  */
 
 #include "xObject.h"
-
-xObject::xObject() {
-	// TODO Auto-generated constructor stub
-
-}
-
-xObject::~xObject() {
-	// TODO Auto-generated destructor stub
-}
