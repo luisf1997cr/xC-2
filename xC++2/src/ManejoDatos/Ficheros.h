@@ -12,10 +12,18 @@
 #include <fstream>
 #include <stdio.h>
 #include <string.h>
-
+#include "LinkedList.h"
 class Ficheros {
 public:
 	Ficheros();
+	bool cadenaDentroDeOtra(char pline[], char pBuscar[]);
+
+	int leerEnFichero(char nameArchive[]);
+
+	int escribirEnFichero(char nameArchive[]);
+
+	char* extraerParametrosInclude(char line[], int plarge);
+
 	virtual ~Ficheros();
 };
 

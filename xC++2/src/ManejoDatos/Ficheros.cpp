@@ -7,10 +7,15 @@
 
 #include "Ficheros.h"
 
+#include <iostream>
+#include <fstream>
+#include <stdio.h>
+#include <string.h>
+
 using namespace std;
 
-int leer() {
-	    ifstream myfile("prueba.txt", std::ifstream::in);
+int Ficheros::leerEnFichero(char pnameArchive[]) {
+	    ifstream myfile(pnameArchive, std::ifstream::in);
 		if (myfile.is_open()){
 			 string s;
 			  while(getline(myfile,s)){
@@ -25,8 +30,8 @@ int leer() {
 	return 0;
 }
 
-int escribir() {
-	    ofstream myfile("prueba.txt");
+int Ficheros::escribirEnFichero(char pnameArchive[]) {
+	    ofstream myfile(pnameArchive);
 		if (myfile.is_open()){
 			 string s;
 
@@ -39,15 +44,47 @@ int escribir() {
 		}
 	return 0;
 }
-/*
-int main(){
 
-	int helado = leer();
-	int vainilla = escribir();
-
-	cout << helado<< endl;
-	cout << vainilla<< endl;
-
-	return 0;
+bool Ficheros::cadenaDentroDeOtra (char plineadiv[], char pBuscar[])
+{
+	char * pch;
+	pch = strstr(plineadiv, pBuscar);
+	if (pch != NULL){
+		std::cout<<"Si se encuentra"<<std::endl;
+		return true;
+	}
+	std::cout<<"No se encuentra"<<std::endl;
+	return false;
 }
-*/
+
+char* Ficheros::extraerParametrosInclude (char pline[], int plarge)
+{
+	int i=0;
+	cout << pline<<endl;
+
+	int y = strlen(pline)-plarge;
+
+	static char NuevoCharLine[15];
+
+	cout<< y <<endl;
+
+	while(i<y){
+		NuevoCharLine[i] = pline[i];
+		i = i+1;
+	}
+	cout<< "sali" <<endl;
+	NuevoCharLine[y] = 0;
+
+	cout<< NuevoCharLine<<endl;
+
+	return NuevoCharLine;
+
+}
+
+Ficheros::Ficheros(){
+
+}
+Ficheros::~Ficheros(){
+
+}
+
