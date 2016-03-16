@@ -13,6 +13,8 @@ class ID {
 public:
 	static long int id=0;
 	ID();
+	virtual ~ID(){delete ID::id;}
+	int getID(){return ID::id;}
 
 };
 ID::ID(){

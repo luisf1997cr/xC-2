@@ -19,7 +19,6 @@ public:
 	bool deserialize (xJson*);
 */	char* getClassName(void);
 	virtual ~xObject();
-	ID* HOLA = new ID();
 
 
 };
