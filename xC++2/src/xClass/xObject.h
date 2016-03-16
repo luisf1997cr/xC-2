@@ -7,6 +7,9 @@
 
 #ifndef SRC_XCLASS_XOBJECT_H_
 #define SRC_XCLASS_XOBJECT_H_
+#include <stdio.h>
+#include <iostream>
+#include <iomanip>
 
 class xObject {
 public:
@@ -15,8 +18,12 @@ public:
 	xJson* serialize();
 	bool deserialize (xJson*);
 */	char* getClassName(void);
-	long getId();
 	virtual ~xObject();
+	ID* HOLA = new ID();
+
+
 };
 
+
 #endif /* SRC_XCLASS_XOBJECT_H_ */
+
