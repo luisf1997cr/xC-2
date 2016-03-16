@@ -3,6 +3,8 @@
  *
  *  Created on: 4 de mar. de 2016
  *      Author: gabriel
+ *
+ *      Se encarga del manejo de logica en archivos
  */
 
 #include "Ficheros.h"
@@ -14,7 +16,11 @@
 
 using namespace std;
 
-int Ficheros::leerEnFichero(char pnameArchive[]) {
+/**
+ * @param char pnameArchive[] Corresponde a un char con el nombre del archivo en que se desea leer
+ * @return Lee cada linea del archivo
+ */
+void Ficheros::leerEnFichero(char pnameArchive[]) {
 	    ifstream myfile(pnameArchive, std::ifstream::in);
 		if (myfile.is_open()){
 			 string s;
@@ -27,10 +33,14 @@ int Ficheros::leerEnFichero(char pnameArchive[]) {
 		else {
 			cout << "No se pudo abrir el archivo";
 		}
-	return 0;
 }
 
-int Ficheros::escribirEnFichero(char pnameArchive[]) {
+/**
+ * @param char pnameArchive[] Corresponde a un char con el nombre del archivo en que se desea escribir
+ * @param char pEscribir[] Lo que se desea escribir
+ * @return Escribe determinado char en un archivo
+ */
+void Ficheros::escribirEnFichero(char pnameArchive[], char pEscribir[]) {
 	    ofstream myfile(pnameArchive);
 		if (myfile.is_open()){
 			 string s;
@@ -42,9 +52,13 @@ int Ficheros::escribirEnFichero(char pnameArchive[]) {
 		else {
 			cout << "No se pudo abrir el archivo";
 		}
-	return 0;
 }
 
+/**
+ * @param char plineadiv[] Linea en la cual se va a buscar determinado char
+ * @param char pBuscar[] Lo que se desea buscar en la linea
+ * @return True o False al encontrar o no lo que se desea
+ */
 bool Ficheros::cadenaDentroDeOtra (char plineadiv[], char pBuscar[])
 {
 	char * pch;
@@ -57,6 +71,11 @@ bool Ficheros::cadenaDentroDeOtra (char plineadiv[], char pBuscar[])
 	return false;
 }
 
+/**
+ * @param
+ * @param
+ * @return
+ */
 char* Ficheros::extraerParametrosInclude (char pline[], int plarge)
 {
 	int i=0;

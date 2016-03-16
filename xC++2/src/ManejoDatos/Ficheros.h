@@ -18,11 +18,11 @@ public:
 	Ficheros();
 	bool cadenaDentroDeOtra(char pline[], char pBuscar[]);
 
-	int leerEnFichero(char nameArchive[]);
+	void leerEnFichero(char pnameArchive[]);
 
-	int escribirEnFichero(char nameArchive[]);
+	void escribirEnFichero(char nameArchive[], char pEscribir[]);
 
-	char* extraerParametrosInclude(char line[], int plarge);
+	char* extraerParametrosInclude(char pline[], int plarge);
 
 	virtual ~Ficheros();
 };
