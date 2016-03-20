@@ -13,6 +13,11 @@
 #include <stdio.h>
 #include <string.h>
 #include "LinkedList.h"
+
+#include <sys/types.h>
+#include <dirent.h>
+
+
 class Ficheros {
 public:
 	Ficheros();
@@ -23,6 +28,10 @@ public:
 	void escribirEnFichero(char nameArchive[], char pEscribir[]);
 
 	char* extraerParametrosInclude(char pline[], int plarge);
+
+	void leerEnFicheroPrepro(char pnameArchive[]);
+
+	int Folder();
 
 	virtual ~Ficheros();
 };

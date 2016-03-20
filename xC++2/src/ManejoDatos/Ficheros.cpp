@@ -8,7 +8,6 @@
  */
 
 #include "Ficheros.h"
-
 #include <iostream>
 #include <fstream>
 #include <stdio.h>
@@ -43,9 +42,7 @@ void Ficheros::leerEnFichero(char pnameArchive[]) {
 void Ficheros::escribirEnFichero(char pnameArchive[], char pEscribir[]) {
 	    ofstream myfile(pnameArchive);
 		if (myfile.is_open()){
-			 string s;
-
-			 myfile << s;
+			 myfile << pEscribir;
 			 cout << "Se escribio"<< endl;
 			 myfile.close();
 		}
@@ -79,26 +76,72 @@ bool Ficheros::cadenaDentroDeOtra (char plineadiv[], char pBuscar[])
 char* Ficheros::extraerParametrosInclude (char pline[], int plarge)
 {
 	int i=0;
-	cout << pline<<endl;
-
 	int y = strlen(pline)-plarge;
-
 	static char NuevoCharLine[15];
-
-	cout<< y <<endl;
-
 	while(i<y){
 		NuevoCharLine[i] = pline[i];
 		i = i+1;
 	}
 	cout<< "sali" <<endl;
 	NuevoCharLine[y] = 0;
-
-	cout<< NuevoCharLine<<endl;
-
 	return NuevoCharLine;
 
 }
+
+/**
+ * @param char pnameArchive[] Corresponde a un char con el nombre del archivo en que se desea leer
+ * @return Lee cada linea del archivo
+ */
+void Ficheros::leerEnFicheroPrepro(char pnameArchive[]) {
+	LinkedList<char *> *listaDeIncludes;
+
+	ifstream myfile(pnameArchive, std::ifstream::in);
+	if (myfile.is_open()){
+		string s;
+		int numLine = 0;
+		while(getline(myfile,s)){
+			numLine = numLine+1;
+			char sd[] = "//x include";
+			char *line = new char[s.length()+1];
+			strcpy(line, s.c_str());
+			if (cadenaDentroDeOtra(line, sd)){
+				char *e =extraerParametrosInclude(line, sizeof(sd));
+
+
+				cout <<e<<endl;
+			}
+			cout <<numLine<<endl;
+
+			delete[] line;
+		}
+
+		cout << "listo leido"<< endl;
+		myfile.close();
+	}
+	else {
+		cout << "No se pudo abrir el archivo";
+	}
+}
+
+int Ficheros::Folder ()
+{
+	DIR *dp;
+	struct dirent *ep;
+
+	dp = opendir ("./");
+	if (dp != NULL)
+	{
+		while (ep = readdir (dp))
+			puts (ep->d_name);
+		(void) closedir (dp);
+	}
+	else
+		perror ("Couldn't open the directory");
+
+	return 0;
+}
+
+
 
 Ficheros::Ficheros(){
 
@@ -106,4 +149,3 @@ Ficheros::Ficheros(){
 Ficheros::~Ficheros(){
 
 }
-

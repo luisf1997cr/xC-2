@@ -52,15 +52,16 @@ int main()
 	cout << result -> val << endl;
 	**/
 
-	char st[] = "int y //x include";
-	char sd[] = "//x include";
-
 	Ficheros m;
 
-	char* p = m.extraerParametrosInclude(st, 12);
-	cout << "l" <<endl;
-	cout << p <<endl;
-	cout << "k" <<endl;
+	/**
+	char *st = "int y //x include";
+	char sd[] = "//x include";
+
+*/
+
+
+	m.Folder();
 
 	return 0;
 }

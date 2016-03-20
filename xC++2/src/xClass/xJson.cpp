@@ -8,13 +8,7 @@
 #include "xJson.h"
 using namespace std;
 
-xJson::xJson() {
-
-}
-
-xJson::~xJson() {
-	// TODO Auto-generated destructor stub
-}
+/**
 
 xJson* xJson::serialize(xObject pObjeto){
 	Json::Value valorJson;
@@ -43,4 +37,12 @@ bool xJson::deserialize(xJson* pJson){
 	<<endl;
 	return 1;
 	}
+*/
+
+xJson::xJson() {
+
+}
+
+xJson::~xJson() {
+	// TODO Auto-generated destructor stub
 }
