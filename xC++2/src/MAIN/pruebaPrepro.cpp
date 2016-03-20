@@ -7,6 +7,10 @@
 
 #include "pruebaPrepro.h"
 
+
+
+char *st = "int y //x include";
+
 pruebaPrepro::pruebaPrepro() {
 	// TODO Auto-generated constructor stub
 

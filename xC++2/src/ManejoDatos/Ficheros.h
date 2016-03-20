@@ -31,7 +31,7 @@ public:
 
 	void leerEnFicheroPrepro(char pnameArchive[]);
 
-	int Folder();
+	int BuscarArchivosEnFolder(char pSourceDir[]);
 
 	virtual ~Ficheros();
 };

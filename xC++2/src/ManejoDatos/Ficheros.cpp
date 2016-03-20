@@ -90,7 +90,7 @@ char* Ficheros::extraerParametrosInclude (char pline[], int plarge)
 
 /**
  * @param char pnameArchive[] Corresponde a un char con el nombre del archivo en que se desea leer
- * @return Lee cada linea del archivo
+ * @return Lee cada linea del archivo y realiza la logica de buscar includes
  */
 void Ficheros::leerEnFicheroPrepro(char pnameArchive[]) {
 	LinkedList<char *> *listaDeIncludes;
@@ -106,8 +106,6 @@ void Ficheros::leerEnFicheroPrepro(char pnameArchive[]) {
 			strcpy(line, s.c_str());
 			if (cadenaDentroDeOtra(line, sd)){
 				char *e =extraerParametrosInclude(line, sizeof(sd));
-
-
 				cout <<e<<endl;
 			}
 			cout <<numLine<<endl;
@@ -119,20 +117,33 @@ void Ficheros::leerEnFicheroPrepro(char pnameArchive[]) {
 		myfile.close();
 	}
 	else {
-		cout << "No se pudo abrir el archivo";
+		cout << "No se pudo abrir el archivo"<< endl;
 	}
 }
 
-int Ficheros::Folder ()
+/**
+ * @param char pSourceDir[] Corresponde a un char con el directorio donde buscar archivos .cpp y .g
+ * @return
+ */
+int Ficheros::BuscarArchivosEnFolder (char pSourceDir[])
 {
+
 	DIR *dp;
 	struct dirent *ep;
 
-	dp = opendir ("./");
+	dp = opendir (pSourceDir);
 	if (dp != NULL)
 	{
-		while (ep = readdir (dp))
-			puts (ep->d_name);
+		while (ep = readdir (dp)){
+			//puts (ep->d_name);
+			cout << ep->d_name <<endl;
+
+			leerEnFicheroPrepro(strcat(pSourceDir, ep->d_name));
+
+			cout << "UBHBVUHYVUYH" <<endl;
+
+
+		}
 		(void) closedir (dp);
 	}
 	else

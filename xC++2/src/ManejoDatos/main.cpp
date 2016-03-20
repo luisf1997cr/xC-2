@@ -60,8 +60,10 @@ int main()
 
 */
 
+	char dir[]= "/home/gabriel/git/xC-2/xC++2/src/MAIN";
 
-	m.Folder();
+
+	m.BuscarArchivosEnFolder(dir);
 
 	return 0;
 }
