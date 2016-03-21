@@ -9,7 +9,9 @@
 
 
 
-char *st = "int y //x include";
+char *st = "int y" "//x include";
+
+//int x = 0; "//x include"
 
 pruebaPrepro::pruebaPrepro() {
 	// TODO Auto-generated constructor stub

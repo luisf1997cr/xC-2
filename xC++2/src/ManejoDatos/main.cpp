@@ -31,7 +31,8 @@ int main()
 	NodoSimple<void*> * A = new NodoSimple<void*> {"Apple", &n, NULL};
 	NodoSimple<void*> * B = new NodoSimple<void*> {"Banana", &m, NULL};
 	NodoSimple<void*> * C = new NodoSimple<void*> {"Caterpillar", &o, NULL};
-	NodoSimple<void*> * D = new NodoSimple<void*> {"Dog", &p, NULL};
+	NodoSimple<void*> * D = new NodoSimple<
+	void*> {"Dog", &p, NULL};
 	NodoSimple<void*> * E = new NodoSimple<void*> {"Elephant", &r, NULL};
 
 	table->insertItem(A);
@@ -60,8 +61,7 @@ int main()
 
 */
 
-	char dir[]= "/home/gabriel/git/xC-2/xC++2/src/MAIN";
-
+	char dir[]= "/home/gabriel/git/xC-2/xC++2/src/MAIN/";
 
 	m.BuscarArchivosEnFolder(dir);
 

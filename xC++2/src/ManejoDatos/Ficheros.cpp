@@ -30,7 +30,7 @@ void Ficheros::leerEnFichero(char pnameArchive[]) {
 			myfile.close();
 		}
 		else {
-			cout << "No se pudo abrir el archivo";
+			cout << "No se pudo abrir el archivo: "<< pnameArchive<<endl;
 		}
 }
 
@@ -76,7 +76,7 @@ bool Ficheros::cadenaDentroDeOtra (char plineadiv[], char pBuscar[])
 char* Ficheros::extraerParametrosInclude (char pline[], int plarge)
 {
 	int i=0;
-	int y = strlen(pline)-plarge;
+	int y = strlen(pline)-plarge-1;
 	static char NuevoCharLine[15];
 	while(i<y){
 		NuevoCharLine[i] = pline[i];
@@ -94,7 +94,6 @@ char* Ficheros::extraerParametrosInclude (char pline[], int plarge)
  */
 void Ficheros::leerEnFicheroPrepro(char pnameArchive[]) {
 	LinkedList<char *> *listaDeIncludes;
-
 	ifstream myfile(pnameArchive, std::ifstream::in);
 	if (myfile.is_open()){
 		string s;
@@ -102,22 +101,22 @@ void Ficheros::leerEnFicheroPrepro(char pnameArchive[]) {
 		while(getline(myfile,s)){
 			numLine = numLine+1;
 			char sd[] = "//x include";
-			char *line = new char[s.length()+1];
+			char *line = new char[s.length()];
 			strcpy(line, s.c_str());
+
 			if (cadenaDentroDeOtra(line, sd)){
-				char *e =extraerParametrosInclude(line, sizeof(sd));
+				char *e =extraerParametrosInclude(line, sizeof(sd)+1);
 				cout <<e<<endl;
 			}
 			cout <<numLine<<endl;
 
 			delete[] line;
 		}
-
 		cout << "listo leido"<< endl;
 		myfile.close();
 	}
 	else {
-		cout << "No se pudo abrir el archivo"<< endl;
+		cout << "No se pudo abrir el archivo: " << pnameArchive<< endl;
 	}
 }
 
@@ -127,22 +126,21 @@ void Ficheros::leerEnFicheroPrepro(char pnameArchive[]) {
  */
 int Ficheros::BuscarArchivosEnFolder (char pSourceDir[])
 {
-
+	int SiZe = sizeof(pSourceDir);
+	unsigned char isFile =0x8;
 	DIR *dp;
 	struct dirent *ep;
-
 	dp = opendir (pSourceDir);
 	if (dp != NULL)
 	{
 		while (ep = readdir (dp)){
-			//puts (ep->d_name);
-			cout << ep->d_name <<endl;
-
-			leerEnFicheroPrepro(strcat(pSourceDir, ep->d_name));
-
-			cout << "UBHBVUHYVUYH" <<endl;
-
-
+			char NewSD[1] ={};
+			strncat(NewSD, pSourceDir, 256);
+			 if ( ep->d_type == isFile)
+			   {
+				cout <<"Found a File : " << ep->d_name << endl;
+				leerEnFicheroPrepro((strncat(NewSD, ep->d_name, (sizeof(ep->d_name)))));
+			   }
 		}
 		(void) closedir (dp);
 	}
