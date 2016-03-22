@@ -26,7 +26,7 @@
 
 #include <string>
 #include <netinet/in.h>
-#include "tcpstream.h"
+#include "conexion/tcpstream.h"
 
 using namespace std;
 

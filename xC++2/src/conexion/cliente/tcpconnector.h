@@ -6,7 +6,7 @@
 
    ------------------------------------------
 
-   Copyright © 2013 [Vic Hargrave - http://vichargrave.com]
+   Copyright ï¿½ 2013 [Vic Hargrave - http://vichargrave.com]
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@
 #define __tcpconnector_h__
 
 #include <netinet/in.h>
-#include "tcpstream.h"
+#include "conexion/tcpstream.h"
 
 class TCPConnector
 {
