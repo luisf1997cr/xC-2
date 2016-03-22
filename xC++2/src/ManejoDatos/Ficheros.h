@@ -29,7 +29,7 @@ public:
 
 	char* extraerParametrosInclude(char pline[], int plarge);
 
-	void leerEnFicheroPrepro(char pnameArchive[]);
+	void leerEnFicheroPrepro(char pnameArchive[], char pBuscar[]);
 
 	int BuscarArchivosEnFolder(char pSourceDir[]);
 

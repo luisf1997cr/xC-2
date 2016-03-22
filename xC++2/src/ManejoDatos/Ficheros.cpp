@@ -92,7 +92,7 @@ char* Ficheros::extraerParametrosInclude (char pline[], int plarge)
  * @param char pnameArchive[] Corresponde a un char con el nombre del archivo en que se desea leer
  * @return Lee cada linea del archivo y realiza la logica de buscar includes
  */
-void Ficheros::leerEnFicheroPrepro(char pnameArchive[]) {
+void Ficheros::leerEnFicheroPrepro(char pnameArchive[], char pBusscar[]) {
 	LinkedList<char *> *listaDeIncludes;
 	ifstream myfile(pnameArchive, std::ifstream::in);
 	if (myfile.is_open()){
@@ -100,17 +100,14 @@ void Ficheros::leerEnFicheroPrepro(char pnameArchive[]) {
 		int numLine = 0;
 		while(getline(myfile,s)){
 			numLine = numLine+1;
-			char sd[] = "//x include";
-			char *line = new char[s.length()];
+			char line[s.length()];
 			strcpy(line, s.c_str());
 
-			if (cadenaDentroDeOtra(line, sd)){
-				char *e =extraerParametrosInclude(line, sizeof(sd)+1);
+			if (cadenaDentroDeOtra(line, pBusscar)){
+				char *e =extraerParametrosInclude(line, sizeof(pBusscar)+1);
 				cout <<e<<endl;
 			}
 			cout <<numLine<<endl;
-
-			delete[] line;
 		}
 		cout << "listo leido"<< endl;
 		myfile.close();
@@ -121,12 +118,12 @@ void Ficheros::leerEnFicheroPrepro(char pnameArchive[]) {
 }
 
 /**
- * @param char pSourceDir[] Corresponde a un char con el directorio donde buscar archivos .cpp y .g
- * @return
+ * @param char pSourceDir[] Corresponde a un char con el directorio donde buscar archivos .cpp y .h
+ * @return Se encarga de procesar la direccion, buscar archivos y mandar a llamar metodos del preprocesador
  */
 int Ficheros::BuscarArchivosEnFolder (char pSourceDir[])
 {
-	int SiZe = sizeof(pSourceDir);
+	char sd[] = "//x include";
 	unsigned char isFile =0x8;
 	DIR *dp;
 	struct dirent *ep;
@@ -134,12 +131,12 @@ int Ficheros::BuscarArchivosEnFolder (char pSourceDir[])
 	if (dp != NULL)
 	{
 		while (ep = readdir (dp)){
-			char NewSD[1] ={};
-			strncat(NewSD, pSourceDir, 256);
-			 if ( ep->d_type == isFile)
+			char NewSD[100] ={};
+			strcat(NewSD, pSourceDir);
+			if ( ep->d_type == isFile)
 			   {
 				cout <<"Found a File : " << ep->d_name << endl;
-				leerEnFicheroPrepro((strncat(NewSD, ep->d_name, (sizeof(ep->d_name)))));
+				leerEnFicheroPrepro((strncat(NewSD, ep->d_name, (sizeof(ep->d_name)))), sd);
 			   }
 		}
 		(void) closedir (dp);
