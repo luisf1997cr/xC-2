@@ -16,7 +16,7 @@ class xObject {
 public:
 	xObject();
 
-	xJson* serialize();
+	//xJson* serialize();
 	bool deserialize (xJson*);
 	char* getClassName(void);
 	virtual ~xObject();
