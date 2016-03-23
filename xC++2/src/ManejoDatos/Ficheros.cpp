@@ -105,6 +105,8 @@ void Ficheros::leerEnFicheroPrepro(char pnameArchive[], char pBusscar[]) {
 
 			if (cadenaDentroDeOtra(line, pBusscar)){
 				char *e =extraerParametrosInclude(line, sizeof(pBusscar)+1);
+				char * prueba = "valorJson["+"lo que tengo que cortar]= get"+"lo que corte"+"()";
+				//escribirEnFichero(char , char)
 				cout <<e<<endl;
 			}
 			cout <<numLine<<endl;

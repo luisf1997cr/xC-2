@@ -6,3 +6,9 @@
  */
 
 #include "xObject.h"
+
+xJson* xObject::serialize(){
+	Json::Value valorJson;
+	Json::StyledWriter escritor;
+
+}
