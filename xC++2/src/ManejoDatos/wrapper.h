@@ -10,33 +10,33 @@
 #ifndef SRC_XCLASS_WRAPPER_H_
 #define SRC_XCLASS_WRAPPER_H_
 
+#include <new>
+#include "xObject.h"
+#include "../xMemoryManager/xMemoryManager.h"
+
 
 /**
  * Clase wrapper de un entero
  * @param Recibe un entero para su constructor
  */
 
-class xInt {
+class xInt : public xObject, public xMemoryManager{
 
 private:
-	int* valor;
+	int valor;
 
 public:
 
-	xInt(int* val) {
-		this->valor = val;
-	}
+	void* operator new(size_t pSize);
 
-	int* intValue() {
-		return valor;
-	}
+	xInt();
 
-	~xInt(){
-		delete this->valor;
-	}
+	int intValue();
+
+	~xInt();
 };
 
-class xFloat {
+class xFloat : public xObject{
 
 private:
 	float* valor;
@@ -57,7 +57,7 @@ public:
 
 };
 
-class xLong {
+class xLong : public xObject{
 
 private:
 	long* valor;
@@ -77,7 +77,7 @@ public:
 	}
 };
 
-class xShort {
+class xShort : public xObject{
 
 private:
 	short* valor;
@@ -98,7 +98,7 @@ public:
 
 };
 
-class xBool {
+class xBool : public xObject{
 
 private:
 	bool* valor;
@@ -119,7 +119,7 @@ public:
 
 };
 
-class xDouble {
+class xDouble : public xObject{
 
 private:
 	double* valor;
@@ -140,7 +140,7 @@ public:
 
 };
 
-class xChar {
+class xChar : public xObject{
 
 private:
 	char* valor;
@@ -152,12 +152,14 @@ public:
 	}
 
 	char* intValue() {
+		cout << valor << endl;
 		return valor;
 	}
 
 	~xChar(){
 		delete this->valor;
 	}
-
 };
 #endif /* SRC_XCLASS_WRAPPER_H_ */
+
+
