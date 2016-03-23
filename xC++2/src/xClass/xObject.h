@@ -20,6 +20,12 @@ public:
 	bool deserialize (xJson*);
 	char* getClassName(void);
 	virtual ~xObject();
+	void setId(long int pID);
+	long int getId();
+
+
+private:
+	static long int _Id;
 
 
 };
