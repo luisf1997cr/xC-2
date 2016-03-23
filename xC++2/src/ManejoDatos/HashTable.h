@@ -60,6 +60,13 @@ public:
      */
     AnyType* getDataByKey(string pItemKey);
 
+    /**
+     * @brief Metodo devuelve el nado numero pNumElem
+     * @param pNumElem
+     * @return NodoSimple<AnyType>
+     */
+    NodoSimple<AnyType>* getItemByNumElem(int pNumElem);
+
     // Display the contents of the Hash Table to console window.
     void printTable();
 
@@ -85,7 +92,6 @@ HashTable<AnyType>::HashTable( int tableLength )
     if (tableLength <= 0) tableLength = 13;
     array = new LinkedList<AnyType>[ tableLength ];
     length = tableLength;
-
 }
 
 // Returns an array location for a given item key.
@@ -128,6 +134,19 @@ template<class AnyType>
 AnyType* HashTable<AnyType>::getDataByKey(string pItemKey){
 	NodoSimple<AnyType> *nodo = getItemByKey(pItemKey);
 	return nodo->val;
+}
+
+template<class AnyType>
+NodoSimple<AnyType>* HashTable<AnyType>::getItemByNumElem(int pNumElem){
+	int elem = 0;
+	int index = 0;
+	while(elem < pNumElem){
+		elem = elem +array[index].getLength();
+		index++;
+	}
+	elem = elem - array[index].getLength() - pNumElem;
+	index--;
+	return array[index].getItemByPosition(elem+1);
 }
 
 // Display the contents of the Hash Table to console window.
