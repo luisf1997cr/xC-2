@@ -1,28 +1,47 @@
-/*
- * xPointer.h
- *
- *  Created on: 2 de mar. de 2016
- *      Author: gabriel
+/**
+ * @file xPointer.h
+ * @date 8/3/16
+ * @author Jose Eduardo Jimenez A 2014072577
+ * @title xPointer
+ * @brief Abstracion de un puntero para el proyecto xC++2
  */
+#ifndef XPOINTER_H_
+#define XPOINTER_H_
+#include <iostream>
+#include "../xDataTypes/xObject.h"
 
-#ifndef SRC_XCLASS_XPOINTER_H_
-#define SRC_XCLASS_XPOINTER_H_
+using namespace std;
 
-
-template<typename T>
-
-class xPointer {
-	T* ptr;
+class xPointer{
 public:
 	xPointer();
+	virtual ~xPointer();
 
-	explicit xPointer(T* ptr = 0) : ptr(ptr) {}
-	virtual ~xPointer(){
-		delete ptr;
-	}
+	void operator=(const xPointer pXPointer);
+	//void operator=(AnyType pData);
+	xObject* operator->();
+	void operator++();
+	void operator--();
+	void operator-(int pCant);
+	void operator+(int pCant);
+	void operator-=(int pCant);
+	void operator+=(int pCant);
+	bool operator==(xPointer pXPointer);
+	bool operator!=(xPointer pXPointer);
+	xObject operator*();
 
-	T& operator*() { return *ptr; }
-	T* operator->() { return ptr; }
+	void setTopPointer(void* pTopPointer);
+	void setLimitPointer(void* pLimitPointer);
+	void setReference(int pReference);
+
+	void* getTopPointer();
+	void* getLimitPointer();
+	int getReference();
+
+private:
+	void* _TopPointer;
+	void* _LimitPointer;
+	int _Reference;
 };
 
-#endif /* SRC_XCLASS_XPOINTER_H_ */
+#endif /* XPOINTER_H_ */
