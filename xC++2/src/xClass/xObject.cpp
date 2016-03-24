@@ -25,8 +25,9 @@ xObject::~xObject(){
 
 }
 
-xJson* xObject::serialize(){
-	//Json::Value valorJson;
-	Json::StyledWriter escritor;
-
-}
+//xJson* xObject::serialize(){
+//	//Json::Value valorJson;
+//	Json::StyledWriter escritor;
+//
+//
+//}

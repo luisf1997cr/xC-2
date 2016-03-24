@@ -8,6 +8,8 @@
  */
 
 #include "Ficheros.h"
+#include <sstream>
+#include "LinkedList.h"
 #include <iostream>
 #include <fstream>
 #include <stdio.h>
@@ -117,6 +119,7 @@ void Ficheros::leerEnFicheroPrepro(char pnameArchive[], char pBusscar[]) {
 	if (myfile.is_open()){
 		string s;
 		int numLine = 0;
+		LinkedList<char*> listaresult = new LinkedList<char*>;
 		while(getline(myfile,s)){
 			numLine = numLine+1;
 			char line[s.length()];
@@ -128,11 +131,28 @@ void Ficheros::leerEnFicheroPrepro(char pnameArchive[], char pBusscar[]) {
 
 				cout <<e<<endl;
 
-				escribirEnFicheroExistente("/home/gabriel/Escritorio/PRUEBASPREPRO.TXT", e);
+				listaresult.insertItem(&e);
+				//escribirEnFicheroExistente(pnameArchive, e);
 
 			}
 			cout<<"Numero de linea en archivo: " <<numLine<<endl;
 		}
+		escribirEnFicheroExistente(pnameArchive, "xJson* xObject::serialize(){");
+		escribirEnFicheroExistente(pnameArchive, "Json::Value valorJson;");
+		escribirEnFicheroExistente(pnameArchive, "Json::StyledWriter escritor;");
+		int indice = 0;//lleva el indice de la lista de lo que leyo cada include
+		stringstream convert;//conversor del indice de int a char*
+		convert<<indice;
+		char* parametro = convert.str();//parametro en forma de char*
+		while(indice < listaresult.getLength()){
+			escribirEnFicheroExistente(pnameArchive, "valorJson [param"+parametro+"] = "+listaresult.getItemByPosition(indice)+";");
+			indice++;
+			convert<<indice;
+			parametro = convert.str();
+
+		}
+		escribirEnFicheroExistente(pnameArchive, "}");
+
 		cout << "listo leido"<< endl;
 		myfile.close();
 	}

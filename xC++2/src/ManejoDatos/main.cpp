@@ -61,9 +61,9 @@ int main()
 
 */
 
-	char dir[]= "/home/gabriel/git/xC-2/xC++2/src/MAIN/";
+	char dir[]= "/home/steven/git/xC-2/xC++2/src/MAIN/";
 
-	m.BuscarArchivosEnFolder(dir);
+	m.BuscarArchivosEnFolder(dir, "//x include");
 
 	return 0;
 }
