@@ -8,14 +8,25 @@
 #include "xJson.h"
 using namespace std;
 
-/**
+
 
 xJson* xJson::serialize(xObject pObjeto){
-	Json::Value valorJson;
-	Json::StyledWriter escritor;
 
-	//valorJson["Valor"]= xObject.valor;
-	//valorJson["ID"]= xObject.id;
+	switch (include_char){
+		case "xInt":
+			Json::Value valorJson;
+			Json::StyledWriter escritor;
+			//serializacion para xObject de tipo xInt
+			break;
+
+		case "xChar":
+			//serializacion para xObject de tipo xChar
+			break;
+	}
+
+
+	//valorJson["Valor"]= pObjecto.valor;
+	//valorJson["ID"]= pObjecto.id;
 
 	string sObjeto=escritor.write(valorJson);
 
@@ -37,7 +48,6 @@ bool xJson::deserialize(xJson* pJson){
 	<<endl;
 	return 1;
 	}
-*/
 
 xJson::xJson() {
 

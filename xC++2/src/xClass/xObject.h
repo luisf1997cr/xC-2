@@ -10,15 +10,22 @@
 #include <stdio.h>
 #include <iostream>
 #include <iomanip>
+#include "jsoncpp/json.h"
 
 class xObject {
 public:
 	xObject();
-/*
-	xJson* serialize();
+
+	//xJson* serialize();
 	bool deserialize (xJson*);
-*/	char* getClassName(void);
+	char* getClassName(void);
 	virtual ~xObject();
+	void setId(long int pID);
+	long int getId();
+
+
+private:
+	static long int _Id;
 
 
 };

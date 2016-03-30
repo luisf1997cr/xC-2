@@ -8,6 +8,8 @@
  */
 
 #include "Ficheros.h"
+#include <sstream>
+#include "LinkedList.h"
 #include <iostream>
 #include <fstream>
 #include <stdio.h>
@@ -39,10 +41,29 @@ void Ficheros::leerEnFichero(char pnameArchive[]) {
  * @param char pEscribir[] Lo que se desea escribir
  * @return Escribe determinado char en un archivo
  */
-void Ficheros::escribirEnFichero(char pnameArchive[], char pEscribir[]) {
+void Ficheros::escribirEnFicheroExistente(char pnameArchive[], char pEscribir[]) {
+	    std::fstream myfile;
+	    myfile.open(pnameArchive, std::fstream::in | std::fstream::out | std::fstream::app);
+
+		if (myfile.is_open()){
+			 myfile << pEscribir<<endl;
+			 cout << "Se escribio"<< endl;
+			 myfile.close();
+		}
+		else {
+			cout << "No se pudo abrir el archivo";
+		}
+}
+
+/**
+ * @param char pnameArchive[] Corresponde a un char con el nombre del archivo en que se desea escribir
+ * @param char pEscribir[] Lo que se desea escribir
+ * @return Escribe determinado char en un archivo
+ */
+void Ficheros::escribirEnFicheroNuevo(char pnameArchive[], char pEscribir[]) {
 	    ofstream myfile(pnameArchive);
 		if (myfile.is_open()){
-			 myfile << pEscribir;
+			myfile<<pEscribir;
 			 cout << "Se escribio"<< endl;
 			 myfile.close();
 		}
@@ -69,15 +90,15 @@ bool Ficheros::cadenaDentroDeOtra (char plineadiv[], char pBuscar[])
 }
 
 /**
- * @param
- * @param
+ * @param char pline[] Linea en la que se desea buscar cierta inormacion
+ * @param int plarge Correponde a un entero del tamano de caracteres de pline
  * @return
  */
 char* Ficheros::extraerParametrosInclude (char pline[], int plarge)
 {
 	int i=0;
-	int y = strlen(pline)-plarge-1;
-	static char NuevoCharLine[15];
+	int y = strlen(pline)-(plarge);
+	static char NuevoCharLine[30];
 	while(i<y){
 		NuevoCharLine[i] = pline[i];
 		i = i+1;
@@ -90,25 +111,48 @@ char* Ficheros::extraerParametrosInclude (char pline[], int plarge)
 
 /**
  * @param char pnameArchive[] Corresponde a un char con el nombre del archivo en que se desea leer
+ * @param char pBusscar[] oken para buscar, ya sea //x include o //<xL>   versión=XXXX
  * @return Lee cada linea del archivo y realiza la logica de buscar includes
  */
 void Ficheros::leerEnFicheroPrepro(char pnameArchive[], char pBusscar[]) {
-	LinkedList<char *> *listaDeIncludes;
 	ifstream myfile(pnameArchive, std::ifstream::in);
 	if (myfile.is_open()){
 		string s;
 		int numLine = 0;
+		LinkedList<char*> listaresult = new LinkedList<char*>;
 		while(getline(myfile,s)){
 			numLine = numLine+1;
 			char line[s.length()];
 			strcpy(line, s.c_str());
-
 			if (cadenaDentroDeOtra(line, pBusscar)){
-				char *e =extraerParametrosInclude(line, sizeof(pBusscar)+1);
+
+
+				char *e =extraerParametrosInclude(line, strlen(pBusscar)); // ESTE ES EL CHAR QUE DEVUELVE LO DEL INCLUDE
+
 				cout <<e<<endl;
+
+				listaresult.insertItem(&e);
+				//escribirEnFicheroExistente(pnameArchive, e);
+
 			}
-			cout <<numLine<<endl;
+			cout<<"Numero de linea en archivo: " <<numLine<<endl;
 		}
+		escribirEnFicheroExistente(pnameArchive, "xJson* xObject::serialize(){");
+		escribirEnFicheroExistente(pnameArchive, "Json::Value valorJson;");
+		escribirEnFicheroExistente(pnameArchive, "Json::StyledWriter escritor;");
+		int indice = 0;//lleva el indice de la lista de lo que leyo cada include
+		stringstream convert;//conversor del indice de int a char*
+		convert<<indice;
+		char* parametro = convert.str();//parametro en forma de char*
+		while(indice < listaresult.getLength()){
+			escribirEnFicheroExistente(pnameArchive, "valorJson [param"+parametro+"] = "+listaresult.getItemByPosition(indice)+";");
+			indice++;
+			convert<<indice;
+			parametro = convert.str();
+
+		}
+		escribirEnFicheroExistente(pnameArchive, "}");
+
 		cout << "listo leido"<< endl;
 		myfile.close();
 	}
@@ -118,12 +162,90 @@ void Ficheros::leerEnFicheroPrepro(char pnameArchive[], char pBusscar[]) {
 }
 
 /**
+ * @param char pline[] Corresponde a un char con la linea a analizar
+ * @return Se encarga de procesar los tokens de xC++2
+ */
+void Ficheros::LogicaDeIncludeSerializar(char pline[]){
+	if (cadenaDentroDeOtra(pline, "xInt")){
+
+	}
+
+	if (cadenaDentroDeOtra(pline, "xChar")){
+
+	}
+
+	if (cadenaDentroDeOtra(pline, "xDouble")){
+
+	}
+
+	if (cadenaDentroDeOtra(pline, "xLong")){
+
+	}
+
+	if (cadenaDentroDeOtra(pline, "xFloat")){
+
+	}
+
+	if (cadenaDentroDeOtra(pline, "xBool")){
+
+	}
+
+	if (cadenaDentroDeOtra(pline, "xShort")){
+
+	}
+
+	if (cadenaDentroDeOtra(pline, "xObject")){
+
+	}
+
+}
+
+/**
+ * @param char pline[] Corresponde a un char con la linea a analizar
+ * @return Se encarga de procesar los tokens de xC++2
+ */
+void Ficheros::LogicaDeIncludeDesserializar(char pline[]){
+	if (cadenaDentroDeOtra(pline, "xInt")){
+
+	}
+
+	if (cadenaDentroDeOtra(pline, "xChar")){
+
+	}
+
+	if (cadenaDentroDeOtra(pline, "xDouble")){
+
+	}
+
+	if (cadenaDentroDeOtra(pline, "xLong")){
+
+	}
+
+	if (cadenaDentroDeOtra(pline, "xFloat")){
+
+	}
+
+	if (cadenaDentroDeOtra(pline, "xBool")){
+
+	}
+
+	if (cadenaDentroDeOtra(pline, "xShort")){
+
+	}
+
+	if (cadenaDentroDeOtra(pline, "xObject")){
+
+	}
+
+}
+
+/**
  * @param char pSourceDir[] Corresponde a un char con el directorio donde buscar archivos .cpp y .h
+ * * @param char pBusscar[] oken para buscar, ya sea //x include o //<xL>   versión=XXXX
  * @return Se encarga de procesar la direccion, buscar archivos y mandar a llamar metodos del preprocesador
  */
-int Ficheros::BuscarArchivosEnFolder (char pSourceDir[])
+int Ficheros::BuscarArchivosEnFolder (char pSourceDir[], char pBusscar[])
 {
-	char sd[] = "//x include";
 	unsigned char isFile =0x8;
 	DIR *dp;
 	struct dirent *ep;
@@ -136,7 +258,7 @@ int Ficheros::BuscarArchivosEnFolder (char pSourceDir[])
 			if ( ep->d_type == isFile)
 			   {
 				cout <<"Found a File : " << ep->d_name << endl;
-				leerEnFicheroPrepro((strncat(NewSD, ep->d_name, (sizeof(ep->d_name)))), sd);
+				leerEnFicheroPrepro((strncat(NewSD, ep->d_name, (sizeof(ep->d_name)))), pBusscar);
 			   }
 		}
 		(void) closedir (dp);

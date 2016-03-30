@@ -25,13 +25,19 @@ public:
 
 	void leerEnFichero(char pnameArchive[]);
 
-	void escribirEnFichero(char nameArchive[], char pEscribir[]);
+	void escribirEnFicheroExistente(char nameArchive[], char pEscribir[]);
+
+	void escribirEnFicheroNuevo(char nameArchive[], char pEscribir[]);
 
 	char* extraerParametrosInclude(char pline[], int plarge);
 
 	void leerEnFicheroPrepro(char pnameArchive[], char pBuscar[]);
 
-	int BuscarArchivosEnFolder(char pSourceDir[]);
+	void LogicaDeIncludeSerializar(char pline[]);
+
+	void LogicaDeIncludeDesserializar(char pline[]);
+
+	int BuscarArchivosEnFolder(char pSourceDir[], char pBusscar[]);
 
 	virtual ~Ficheros();
 };

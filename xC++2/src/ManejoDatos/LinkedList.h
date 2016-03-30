@@ -64,6 +64,13 @@ public:
     NodoSimple<AnyType> * getItem( string itemKey );
 
     /**
+     * @brief Metodo devuelve el nodo en la posicion
+     * @param pPosition Posicion
+     * @return NodoSimple<AnyType>
+     */
+    NodoSimple<AnyType> * getItemByPosition(int pPosition);
+
+    /**
      * @brief Metodo devuelve el dato segun la clave
      * @param pItemKey Clave con la que se encuentra guardada
      * @return <class AnyType> Dato de la lista
@@ -88,8 +95,7 @@ public:
 template<class AnyType>
 LinkedList<AnyType>::LinkedList()
 {
-    head = new NodoSimple<AnyType>{"c", NULL, NULL};
-    head -> next = NULL;
+    head = new NodoSimple<AnyType>{"c", NULL , NULL};
     length = 0;
 }
 
@@ -163,6 +169,16 @@ NodoSimple<AnyType> * LinkedList<AnyType>::getItem( string itemKey )
     return NULL;
 }
 
+
+template<class AnyType>
+NodoSimple<AnyType>* LinkedList<AnyType>::getItemByPosition(int pPosition){
+	NodoSimple<AnyType>* nodo = this->head;
+	for(int index = 1; index < pPosition+1; index++){
+		nodo = nodo->next;
+	}
+	return nodo;
+}
+
 template<class AnyType>
 AnyType* LinkedList<AnyType>::getDataItem(string pItemKey){
 	NodoSimple<AnyType>* nodo = getItem(pItemKey);
@@ -186,7 +202,7 @@ void LinkedList<AnyType>::printList()
         p = q;
         if (p != head)
         {
-            cout << p -> val; //AQUI CAMBIE KEY POR VAL
+            cout << p -> val << ":"<< p->key; //AQUI CAMBIE KEY POR VAL
             if (p -> next) cout << ", ";
             else cout << " ";
         }
