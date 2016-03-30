@@ -70,6 +70,8 @@ public:
      */
     AnyType* getDataItem(string pItemKey);
 
+    bool isEmpyte();
+
     // Displays list contents to the console window.
     void printList();
 
