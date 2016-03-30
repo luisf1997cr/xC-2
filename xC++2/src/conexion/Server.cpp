@@ -87,8 +87,7 @@ void* Server::controlador(void* pObjeto){
 
 void Server::sendinfo(const char* pMensaje){
 	for (int index = 0; index < this->_Clientes->len(); index++){
-		cout << ServerConstants::SENDINFO_MSJ << send(this->_Clientes->
-				searchPosition(index),pMensaje,strlen(pMensaje),0);
+		cout << ServerConstants::SENDINFO_MSJ << send(this->_Clientes->searchPosition(index),pMensaje,strlen(pMensaje),0);
 	}
 }
 

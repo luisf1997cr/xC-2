@@ -25,7 +25,7 @@
 #define __tcpconnector_h__
 
 #include <netinet/in.h>
-#include "conexion/tcpstream.h"
+#include "../conexion/tcpstream.h"
 
 class TCPConnector
 {

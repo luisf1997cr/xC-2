@@ -15,7 +15,7 @@
 #include <string.h>
 #include <pthread.h>
 #include <unistd.h>
-#include "../Structures/LinkedList.h"
+#include "../ManejoDatos/LinkedList.h"
 #include "ServerConstants.h"
 
 using namespace std;

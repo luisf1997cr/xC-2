@@ -8,7 +8,9 @@
 
 #ifndef SERVERCONSTANTS_H_
 #define SERVERCONSTANTS_H_
-
+#include <string.h>
+#include <string>
+#include <iostream>
 
 class ServerConstants{
 public:

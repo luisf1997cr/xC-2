@@ -26,13 +26,17 @@
 #include <arpa/inet.h>
 #include "tcpacceptor.h"
 
-TCPAcceptor::TCPAcceptor(int port, const char* address) 
-    : m_lsd(0), m_port(port), m_address(address), m_listening(false) {} 
+LinkedList<string>* Server::_Mensajes = new LinkedList<string>();
+
+TCPAcceptor::TCPAcceptor(const char* address)
+: Socket(0), m_port(ServerConstants::PORT), m_address(address), m_listening(false) {
+	this->_Clientes = new LinkedList<int>();
+}
 
 TCPAcceptor::~TCPAcceptor()
 {
-    if (m_lsd > 0) {
-        close(m_lsd);
+    if (Socket > 0) {
+        close(Socket);
     }
 }
 
@@ -42,7 +46,7 @@ int TCPAcceptor::start()
         return 0;
     }
 
-    m_lsd = socket(PF_INET, SOCK_STREAM, 0);
+    Socket = socket(PF_INET, SOCK_STREAM, 0);
     struct sockaddr_in address;
 
     memset(&address, 0, sizeof(address));
@@ -56,36 +60,83 @@ int TCPAcceptor::start()
     }
     
     int optval = 1;
-    setsockopt(m_lsd, SOL_SOCKET, SO_REUSEADDR, &optval, sizeof optval); 
+    setsockopt(Socket, SOL_SOCKET, SO_REUSEADDR, &optval, sizeof optval);
     
-    int result = bind(m_lsd, (struct sockaddr*)&address, sizeof(address));
+    int result = bind(Socket, (struct sockaddr*)&address, sizeof(address));
     if (result != 0) {
         perror("bind() failed");
         return result;
     }
     
-    result = listen(m_lsd, 5);
+    result = listen(Socket, 5);
     if (result != 0) {
         perror("listen() failed");
         return result;
     }
+
     m_listening = true;
     return result;
 }
 
-TCPStream* TCPAcceptor::accept() 
+
+TCPStream* TCPAcceptor::acceptSocket()
 {
     if (m_listening == false) {
         return NULL;
     }
 
-    struct sockaddr_in address;
-    socklen_t len = sizeof(address);
-    memset(&address, 0, sizeof(address));
-    int sd = ::accept(m_lsd, (struct sockaddr*)&address, &len);
-    if (sd < 0) {
+    infoSocket  data;
+    socklen_t len = sizeof(data);
+    data._Conection = ::accept(Socket, (struct sockaddr*)&data, &len);
+    if (data._Conection < 0) {
         perror("accept() failed");
         return NULL;
+    }else{
+		if(ServerConstants::DEBUG)
+			cout << ServerConstants::CONNECT << endl;
+		this->_Clientes->insertAtFinal(data._Conection);
     }
-    return new TCPStream(sd, &address);
+    pthread_t hilo;
+    pthread_create(&hilo,0,Server::controlador,(void*)data);
+    pthread_detach(hilo);
+    return new TCPStream(Socket, &data);
+    close(Socket);
+}
+
+
+void* Server::controlador(void* pObjeto){
+	 TCPStream* stream = NULL;
+	 string mensaje;
+	 if (start() == 0) {
+	        while (1) {
+	            stream = acceptSocket();
+	            if (stream != NULL) {
+	            	infoSocket *data = (infoSocket*)pObjeto;
+	                ssize_t len;
+	                char line[256];
+	                while ((len = stream->receive(line, sizeof(line))) > 0) {
+	                    line[len] = 0;
+	                    printf("received - %s\n", line);
+	                    mensaje.append(line, len);
+	                    stream->send(line, len);
+	                }
+	                delete stream;
+	            }
+	        }
+	    }
+	pthread_exit(NULL);
+}
+
+void Server::sendinfo(const char* pMensaje){
+	for (int index = 0; index < this->_Clientes->len(); index++){
+		cout << ServerConstants::SENDINFO_MSJ << send(this->_Clientes->searchPosition(index),pMensaje,strlen(pMensaje),0);
+	}
+}
+
+string Server::getMensaje(){
+	string mensaje = ServerConstants::NO_HAY_MSJ;
+	if(this->_Mensajes->isEmpty()){
+		mensaje = this->_Mensajes->searchBegin();
+		this->_Mensajes->deleteAtBegin();
+	}
 }

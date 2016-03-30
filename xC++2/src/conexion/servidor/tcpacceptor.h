@@ -23,29 +23,38 @@
 
 #ifndef __tcpacceptor_h__
 #define __tcpacceptor_h__
-
+#include <sys/socket.h>
 #include <string>
 #include <netinet/in.h>
-#include "conexion/tcpstream.h"
+
+#include "../conexion/tcpstream.h"
+#include "../Structures/LinkedList.h"
+#include "conexion/ServerConstants.h"
 
 using namespace std;
 
 class TCPAcceptor
 {
-    int    m_lsd;
+    int    Socket;
     const int    m_port;
     const string m_address;
     bool   m_listening;
+    LinkedList<int> *_Clientes;
+    static LinkedList<string> *_Mensajes;
 
   public:
-    TCPAcceptor(int port, const char* address="127.0.0.1");
+    TCPAcceptor( const char* address=ClientConstants::IP);
     ~TCPAcceptor();
 
     int        start();
-    TCPStream* accept();
+    TCPStream* acceptSocket();
+    void sendinfo(const char *pMensaje);
+    string getMensaje();
+
 
   private:
     	TCPAcceptor();
+    	static void * controlador(void *pObjeto);
 };
 
 #endif

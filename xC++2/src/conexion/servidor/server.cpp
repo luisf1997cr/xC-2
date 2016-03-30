@@ -38,7 +38,7 @@ int main()
     else {
         acceptor = new TCPAcceptor(8080);
     }
-    if (acceptor->start() == 0) {
+    /**if (acceptor->start() == 0) {
         while (1) {
             stream = acceptor->accept();
             if (stream != NULL) {
@@ -52,7 +52,7 @@ int main()
                 delete stream;
             }
         }
-    }
+    }*/
     exit(0);
 }
 
