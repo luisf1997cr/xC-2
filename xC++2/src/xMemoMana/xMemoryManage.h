@@ -9,10 +9,9 @@
 #ifndef XMEMORYMANAGER_H_
 #define XMEMORYMANAGER_H_
 
-#include <stdlib.h>
-#include <iostream>
-#include <sstream>
-#include <string>
+#include <stdlib.h>		//malloc
+#include <iostream>		//cout
+#include <sstream>		//stringstream
 #include "../Structures/HashTable.h"
 #include "../Structures/NodoSimple.h"
 #include "../xPointer/xPointer.h"
@@ -21,13 +20,6 @@ using namespace std;
 
 class xMemoryManager{
 public:
-//	/**
-//	 * @brief Metodo solicita memoria y devuelve un xPointer inicializado en 0
-//	 * @param pNum Numero de elementos a guardar
-//	 * @param pSize Tamaño de elementos a guardar
-//	 * @return xPointer Puntero en memoria
-//	 */
-//	xPointer xCalloc(int pNum, int pSize);
 	/**
 	 * @brief Metodo solicita memoria y la devuelve un xPointer
 	 * @param pSize Tamaño de memoria solicitada
@@ -47,11 +39,39 @@ public:
 	 */
 	void xSet(bool type, xPointer pXPointer );
 
+	/**
+	 * @brief Metodo devuelve la unica instancia del xMemoryManager
+	 * @return xMemoryManager*
+	 */
 	static xMemoryManager* Instance();
 
+	/**
+	 * @brief Metodo devuelve el atributo _FreeMemory
+	 * @return long
+	 */
+	long int getFreeMemory();
+
+	/**
+	 * @brief Metodo define el atributo _FreeMemory
+	 * @param long
+	 */
+	void setFreeMemory(long int pFreeMemory);
+
+	/**
+	 * @brief Metodo devuelve el atributo _UsedMemory
+	 * @return long
+	 */
+	long int getUsedMemory();
+
+	/**
+	 * @brief Metodo define el aributo _UsedMemory
+	 */
+	void setUsedMemory(long int pUsedMemory);
 
 private:
 	HashTable<xPointer> *_Memoria;
+	long int _FreeMemory;
+	long int _UsedMemory;
 
 protected:
 	/**
