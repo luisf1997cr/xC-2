@@ -13,73 +13,65 @@ xMemoryManager::xMemoryManager() {
 	void* memory = malloc(5000000);    //5000000
 	xPointer localMemory;
 	localMemory.setTopPointer(memory);
-	localMemory.setLimitPointer(memory + 5000000);
+	localMemory.setPointerSize(5000000);
 	localMemory.setReference(-1);
 	std::string s;
 	std::stringstream out;
 	out << localMemory->getId();
 	s = out.str();
-	NodoSimple<xPointer> *n = new NodoSimple<xPointer>{s,&localMemory,NULL};
+	NodoSimple<xPointer> *n = new NodoSimple<xPointer>{s,new xPointer(localMemory),NULL};
 	_Memoria->insertItem(n);
 }
 
-//xPointer xMemoryManager::xCalloc(int pNum, int pSize){
-//	for (int index = 1; index < _Memoria->getLength(); index++ ){
-//		NodoSimple<xPointer<xObject> >* nodoSpace = _Memoria->getItemByNumElem(index);
-//		if((*nodoSpace->val).getReference() == -1){    //status libre
-//			xPointer<xObject> newSpace;
-//			(*nodoSpace->val).setReference(1);
-//			newSpace.setLimitPointer((*nodoSpace->val).getLimitPointer());
-//			(*nodoSpace->val).setLimitPointer((*nodoSpace->val).getTopPointer() + pNum * pSize);
-//			newSpace.setTopPointer((*nodoSpace->val).getLimitPointer() + 1);
-//			std::string s;
-//			std::stringstream out;
-//			out << newSpace.getId();
-//			s = out.str();
-//			NodoSimple<xPointer<xObject> > *newNodoSpace = new NodoSimple<xPointer<xObject> >{s,&newSpace,NULL};
-//			_Memoria->insertItem(newNodoSpace);
-//			return newSpace;
-//		}
-//	}
-//}
-
 xPointer xMemoryManager::xMalloc(int pSize){
-	for (int index = 1; index < _Memoria->getLength(); index++ ){
+	for (int index = 1; index <= _Memoria->getNumberOfItems(); index++ ){
 		NodoSimple<xPointer>* nodoSpace = _Memoria->getItemByNumElem(index);
-		if((*nodoSpace->val).getReference() == -1){    //status libre
-			xPointer newSpace;
-			(*nodoSpace->val).setReference(1);
-			newSpace.setLimitPointer((*nodoSpace->val).getLimitPointer());
-			(*nodoSpace->val).setLimitPointer((*nodoSpace->val).getTopPointer() + pSize);
-			newSpace.setTopPointer((*nodoSpace->val).getLimitPointer() + 1);
-			std::string s;
-			std::stringstream out;
-			out << newSpace->getId();
-			s = out.str();
-			NodoSimple<xPointer> *newNodoSpace = new NodoSimple<xPointer>{s,&newSpace,NULL};
-			_Memoria->insertItem(newNodoSpace);
-			return *nodoSpace->val;
+		if(nodoSpace->val->getReference() == -1){    //status libre
+			long int size = nodoSpace->val->getPointerSize();
+			if (size >= pSize){
+				xPointer newSpace;
+				cout << newSpace->getId() << endl;
+				newSpace.setReference(-1);
+				nodoSpace->val->setReference(1);
+				newSpace.setPointerSize(size - pSize);
+				nodoSpace->val->setPointerSize(pSize);
+				newSpace.setTopPointer(nodoSpace->val->getTopPointer() + pSize);
+				std::string key;
+				std::stringstream out;
+				char* buff = new char[225];
+				strcpy(buff,out.str().c_str());
+				out << newSpace->getId();
+				cout <<"mallocid" << newSpace->getId() << endl;
+				cout <<"malloc" << out.str() << endl;
+				_Memoria->insertItem(new NodoSimple<xPointer>{out.str(),new xPointer(newSpace),NULL});
+				return *nodoSpace->val;
+			}
 		}
 	}
+	cout << "Memory Insufficient" << endl;
+	exit(1);
 }
 
 bool xMemoryManager::xFree(xPointer pXPointer){
-	std::string s;
+	cout << "free" << endl;
+	std::string key;
 	std::stringstream out;
+	char* buff = new char[225];
+	strcpy(buff,out.str().c_str());
 	out << pXPointer->getId();
-	s = out.str();
-	NodoSimple<xPointer> nodo = *_Memoria->getItemByKey(s);
-	if(nodo.val->getReference() == 1){
-		if(nodo.next->val->getReference() == -1){
-			nodo.val->setLimitPointer(nodo.next->val->getLimitPointer());
-			nodo.val->setReference(0);
-			_Memoria->removeItem(nodo.next->key);
-		}else{
-			_Memoria->removeItem(s);
-		}
-	}else{
-		nodo.val->setReference(nodo.val->getReference()-1);
-	}
+	NodoSimple<xPointer> nodo = *_Memoria->getItemByKey(out.str());
+	cout << nodo.val->getTopPointer() << endl;
+//	if(nodo.val->getReference() == 1){
+//		if(nodo.next->val->getReference() == -1){
+//			nodo.val->setPointerSize(nodo.next->val->getPointerSize());
+//			nodo.val->setReference(0);
+//			_Memoria->removeItem(nodo.next->key);
+//		}else{
+//			_Memoria->removeItem(out.str());
+//		}
+//	}else{
+//		nodo.val->setReference(nodo.val->getReference()-1);
+//	}
 }
 
 void xMemoryManager::xSet(bool type,xPointer pXPointer){
