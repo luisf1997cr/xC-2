@@ -10,7 +10,7 @@
 #ifndef SRC_XCLASS_WRAPPER_H_
 #define SRC_XCLASS_WRAPPER_H_
 
-#include <new>
+
 #include "xObject.h"
 #include "../xMemoryManager/xMemoryManager.h"
 
@@ -19,146 +19,113 @@
  * Clase wrapper de un entero
  * @param Recibe un entero para su constructor
  */
-
-class xInt : public xObject, public xMemoryManager{
-
-private:
-	int valor;
+//INT
+class xInt : public xObject{
+	int _Valor;
 
 public:
 
-	void* operator new(size_t pSize);
+	//void* operator new(size_t pSize);
 
-	xInt();
+	xInt(int pData);
 
 	int intValue();
 
 	~xInt();
 };
 
+//FLOAT
 class xFloat : public xObject{
 
 private:
-	float* valor;
+	float _Valor;
 
 public:
 
-	xFloat(float* val) {
-		this->valor = val;
-	}
+	xFloat(float pData);
 
-	float* intValue() {
-		return valor;
-	}
+	float floatValue();
 
-	~xFloat(){
-		delete this->valor;
-	}
+	~xFloat();
 
 };
 
+//LONG
 class xLong : public xObject{
 
 private:
-	long* valor;
+	long _Valor;
 
 public:
 
-	xLong(long* val) {
-		this->valor = val;
-	}
+	xLong(long pData);
 
-	long* intValue() {
-		return valor;
-	}
+	long longValue();
 
-	~xLong(){
-		delete this->valor;
-	}
+	~xLong();
 };
 
+//SHORT
 class xShort : public xObject{
 
 private:
-	short* valor;
+	short _Valor;
 
 public:
 
-	xShort(short* val) {
-		this->valor = val;
-	}
+	xShort(short pDato);
 
-	short* intValue() {
-		return valor;
-	}
+	short shortValue();
 
-	~xShort(){
-		delete this->valor;
-	}
+	~xShort();
 
 };
 
+//BOOL
 class xBool : public xObject{
 
 private:
-	bool* valor;
+	bool _Valor;
 
 public:
 
-	xBool(bool* val) {
-		this->valor = val;
-	}
+	xBool(bool pDato);
 
-	bool* intValue() {
-		return valor;
-	}
+	bool boolValue();
 
-	~xBool(){
-		delete this->valor;
-	}
+	~xBool();
 
 };
 
+//DOUBLE
 class xDouble : public xObject{
 
 private:
-	double* valor;
+	double _Valor;
 
 public:
 
-	xDouble(double* val) {
-		this->valor = val;
-	}
+	xDouble(double pDato);
 
-	double* intValue() {
-		return valor;
-	}
+	double doubleValue();
 
-	~xDouble(){
-		delete this->valor;
-	}
+	~xDouble();
 
 };
 
+//CHAR
 class xChar : public xObject{
 
 private:
-	char* valor;
+	char _Valor;
 
 public:
 
-	xChar(char* val) {
-		this->valor = val;
-	}
+	xChar(char val);
 
-	char* intValue() {
-		cout << valor << endl;
-		return valor;
-	}
+	char charValue();
 
-	~xChar(){
-		delete this->valor;
-	}
+	~xChar();
 };
 #endif /* SRC_XCLASS_WRAPPER_H_ */
 
