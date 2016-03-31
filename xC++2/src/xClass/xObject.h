@@ -1,35 +1,45 @@
-/*
- * xObject.h
- *
- *  Created on: 2 de mar. de 2016
- *      Author: gabriel
+/**
+ * @file xObject.h
+ * @date 9/3/16
+ * @author Jose Eduardo Jimenez A 2014072577
+ * @title xObject
+ * @brief Abstracion de un objeto del tipo Object para el proyecto xC++2
  */
 
-#ifndef SRC_XCLASS_XOBJECT_H_
-#define SRC_XCLASS_XOBJECT_H_
-#include <stdio.h>
+#ifndef XOBJECT_H_
+#define XOBJECT_H_
+
+#include "ID.h"
 #include <iostream>
-#include <iomanip>
-#include "jsoncpp/json.h"
+using namespace std;
 
-class xObject {
+class xObject{
 public:
+	/**
+	 * @brief Metodo costructor de xObject
+	 */
 	xObject();
-
-	//xJson* serialize();
-	bool deserialize (xJson*);
-	char* getClassName(void);
+	/**
+	 * @brief Metodo destrucgtor de xObject
+	 */
 	virtual ~xObject();
+
+	/**
+	 * @brief Metodo define el argumento Id
+	 * @param pID
+	 */
 	void setId(long int pID);
+
+	/**
+	 * @brief Metodo devuelve el argumento Id
+	 * @return long int ID
+	 */
 	long int getId();
 
 
 private:
 	static long int _Id;
-
-
 };
 
 
-#endif /* SRC_XCLASS_XOBJECT_H_ */
-
+#endif /* XOBJECT_H_ */
