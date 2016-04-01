@@ -9,11 +9,15 @@
 
 xPointer::xPointer(){
 	this->_Reference = 1;
-	this->_LimitPointer = NULL;
+	this->_TopPointer = (void*)0;
+	this->_PointerSize = new long int(0);
 }
-void xPointer::operator =(const xPointer pXPointer){
+
+
+void xPointer::operator =(xPointer pXPointer){
 	this->_TopPointer = pXPointer._TopPointer;
-	this->_LimitPointer = pXPointer._LimitPointer;
+	this->_PointerSize = pXPointer._PointerSize;
+	pXPointer.setReference(pXPointer.getReference()+1);
 }
 //template<class AnyType>
 //void xPointer<AnyType>::operator =(AnyType pData){
@@ -27,34 +31,34 @@ xObject* xPointer::operator ->(){
 	return dato;
 }
 void xPointer::operator ++(){
-	int size = ((int*)this->_LimitPointer - (int*)this->_TopPointer) * 4;
+	int size = ((int*)this->_PointerSize - (int*)this->_TopPointer) * 4;
 	this->_TopPointer = this->_TopPointer + size;
-	this->_LimitPointer = this->_LimitPointer + size;
+	this->_PointerSize = this->_PointerSize + size;
 }
 void xPointer::operator --(){
-	int size = ((int*)this->_LimitPointer - (int*)this->_TopPointer) * 4;
+	int size = ((int*)this->_PointerSize - (int*)this->_TopPointer) * 4;
 	this->_TopPointer = this->_TopPointer - size;
-	this->_LimitPointer = this->_LimitPointer - size;
+	this->_PointerSize = this->_PointerSize - size;
 }
 void xPointer::operator -(int pCant){
-	int size = ((int*)this->_LimitPointer - (int*)this->_TopPointer) * 4;
+	int size = ((int*)this->_PointerSize - (int*)this->_TopPointer) * 4;
 	this->_TopPointer = this->_TopPointer - size * pCant;
-	this->_LimitPointer = this->_LimitPointer - size * pCant;
+	this->_PointerSize = this->_PointerSize - size * pCant;
 }
 void xPointer::operator +(int pCant){
-	int size = ((int*)this->_LimitPointer - (int*)this->_TopPointer) * 4;
+	int size = ((int*)this->_PointerSize - (int*)this->_TopPointer) * 4;
 	this->_TopPointer = this->_TopPointer + size * pCant;
-	this->_LimitPointer = this->_LimitPointer + size * pCant;
+	this->_PointerSize = this->_PointerSize + size * pCant;
 }
 void xPointer::operator -=(int pCant){
-	int size = ((int*)this->_LimitPointer - (int*)this->_TopPointer) * 4;
+	int size = ((int*)this->_PointerSize - (int*)this->_TopPointer) * 4;
 	this->_TopPointer = this->_TopPointer - size * pCant;
-	this->_LimitPointer = this->_LimitPointer - size * pCant;
+	this->_PointerSize = this->_PointerSize - size * pCant;
 }
 void xPointer::operator +=(int pCant){
-	int size = ((int*)this->_LimitPointer - (int*)this->_TopPointer) * 4;
+	int size = ((int*)this->_PointerSize - (int*)this->_TopPointer) * 4;
 	this->_TopPointer = this->_TopPointer + size * pCant;
-	this->_LimitPointer = this->_LimitPointer + size * pCant;
+	this->_PointerSize = this->_PointerSize + size * pCant;
 }
 bool xPointer::operator ==(xPointer pXPointer){
 	if(this->_TopPointer == pXPointer.getTopPointer()){
@@ -79,11 +83,11 @@ void xPointer::setTopPointer(void* pTopPointer){
 void* xPointer::getTopPointer(){
 	return this->_TopPointer;
 }
-void xPointer::setLimitPointer(void* pLimitPointer){
-	this->_LimitPointer = pLimitPointer;
+void xPointer::setPointerSize(long int pPointerSize){
+	this->_PointerSize = new long int(pPointerSize);
 }
-void* xPointer::getLimitPointer(){
-	return this->_LimitPointer;
+long int xPointer::getPointerSize(){
+	return *this->_PointerSize;
 }
 void xPointer::setReference(int pReference){
 	this->_Reference = pReference;
@@ -91,10 +95,15 @@ void xPointer::setReference(int pReference){
 int xPointer::getReference(){
 	return this->_Reference;
 }
-xPointer::~xPointer(){
-	// TODO Auto-generated destructor stub
+
+void xPointer::print(){
+	cout << "Dirrecion: " << this->_TopPointer << " Referencia: " << this->_Reference << endl;
 }
 
+xPointer xPointer::super(){
+	return *this;
+}
 
-
-
+xPointer::~xPointer(){
+	//memset(this->_TopPointer, 0, *(int*)this->_PointerSize);
+}
