@@ -1,36 +1,39 @@
-/*
- * wrapper.h
- *
- *  Created on: 15 de mar. de 2016
- *      Author: gabriel
- *
- *      Se encarga de los wrappers de los primitivos
+/**
+ * @file wrapper.h
+ * @date 15/3/16
+ * @author Gabriel Barboza Alvarez
+ * @title Wrapper
+ * @brief Abstracion de los primitivo para el proyecto xC++2
  */
 
 #ifndef SRC_XCLASS_WRAPPER_H_
 #define SRC_XCLASS_WRAPPER_H_
 
-
 #include "xObject.h"
 #include "../xMemoryManager/xMemoryManager.h"
 
 
-/**
- * Clase wrapper de un entero
- * @param Recibe un entero para su constructor
- */
 //INT
 class xInt : public xObject{
 	int _Valor;
 
 public:
 
-	//void* operator new(size_t pSize);
-
+	/**
+	 * @brief Metodo costructor de xInt
+	 * @param pData
+	 */
 	xInt(int pData);
 
+	/**
+	 * @brief Metodo devuelve el valor
+	 * @return int
+	 */
 	int intValue();
 
+	/**
+	 * @brief Metodo destructor de xInt
+	 */
 	~xInt();
 };
 
@@ -42,10 +45,21 @@ private:
 
 public:
 
+	/**
+	 * @brief Metodo costructor de xFloat
+	 * @param pData
+	 */
 	xFloat(float pData);
 
+	/**
+	 * @brief Metodo devuelve el valor
+	 * @return float
+	 */
 	float floatValue();
 
+	/**
+	 * @brief Metodo destructor de xFloat
+	 */
 	~xFloat();
 
 };
@@ -54,14 +68,26 @@ public:
 class xLong : public xObject{
 
 private:
+
 	long _Valor;
 
 public:
 
+	/**
+	 * @brief Metodo costructor de xLong
+	 * @param pData
+	 */
 	xLong(long pData);
 
+	/**
+	 * @brief Metodo devuelve el valor
+	 * @return long
+	 */
 	long longValue();
 
+	/**
+	 * @brief Metodo destructor de xLong
+	 */
 	~xLong();
 };
 
@@ -73,10 +99,21 @@ private:
 
 public:
 
+	/**
+	 * @brief Metodo costructor de xShort
+	 * @param pData
+	 */
 	xShort(short pDato);
 
+	/**
+	 * @brief Metodo devuelve el valor
+	 * @return short
+	 */
 	short shortValue();
 
+	/**
+	 * @brief Metodo destructor de xShort
+	 */
 	~xShort();
 
 };
@@ -89,10 +126,21 @@ private:
 
 public:
 
+	/**
+	 * @brief Metodo costructor de xBool
+	 * @param pDato
+	 */
 	xBool(bool pDato);
 
+	/**
+	 * @brief Metodo devuelve el valor
+	 * @return bool
+	 */
 	bool boolValue();
 
+	/**
+	 * @brief Metodo destructor de xBool
+	 */
 	~xBool();
 
 };
@@ -105,10 +153,21 @@ private:
 
 public:
 
+	/**
+	 * @brief Metodo costructor de xDouble
+	 * @param pDato
+	 */
 	xDouble(double pDato);
 
+	/**
+	 * @brief Metodo devuelve el valor
+	 * @return double
+	 */
 	double doubleValue();
 
+	/**
+	 * @brief Metodo destructor de xDouble
+	 */
 	~xDouble();
 
 };
@@ -121,10 +180,21 @@ private:
 
 public:
 
-	xChar(char val);
+	/**
+	 * @brief Metodo costructor de xChar
+	 * @param pDato
+	 */
+	xChar(char pDato);
 
+	/**
+	 * @brief Metodo devuelve el valor
+	 * @return char
+	 */
 	char charValue();
 
+	/**
+	 * @brief Metodo destructor de xChar
+	 */
 	~xChar();
 };
 #endif /* SRC_XCLASS_WRAPPER_H_ */
