@@ -1,91 +1,104 @@
-//*****************************************************************
-//  HashTable.h
-//  HashTable
-//
-//  Created by Karlina Beringer on June 18, 2014.
-//
-//  This header file contains the Hash Table class declaration.
-//  Hash Table array elements consist of Linked List objects.
-//*****************************************************************
+/**
+ * @file HashTable.h
+ * @date 4/3/16
+ * @title Tabla Hash
+ * @brief Abstracion de una tabla hash para el proyecto xC++2
+ */
 
 #ifndef HashTable_h
 #define HashTable_h
 
 #include "LinkedList.h"
 
-//*****************************************************************
-// Hash Table objects store a fixed number of Linked Lists.
-//*****************************************************************
 template<class AnyType>
 class HashTable
 {
 private:
 
-    // Array is a reference to an array of Linked Lists.
     LinkedList<AnyType> * array;
 
-    // Length is the size of the Hash Table array.
     int length;
 
-    // Returns an array location for a given item key.
     int hash( string itemKey );
 
 public:
 
-    // Constructs the empty Hash Table object.
-    // Array length is set to 13 by default.
-    HashTable( int tableLength = 13 );
-
-    // Adds an item to the Hash Table.
-    void insertItem( NodoSimple<AnyType> * newItem );
+    /**
+     * @brief M\'etodo constructor de HashTable
+     * @param int pTableLength 13 por default
+     */
+    HashTable( int pTableLength = 13 );
 
     /**
-     * @brief Metodo inserta el dato segun el item
-     * @param pItem Item a ingresar
+     * @brief M\'etodo inserta el nodo
+     * @param NodoSimple<AnyType>* pNewItem
+     */
+    void insertItem( NodoSimple<AnyType> * pNewItem );
+
+    /**
+     * @brief Metodo inserta el item
+     * @param AnyType pItem
      */
     void insertItem(AnyType* pItem);
 
-    // Deletes an Item by key from the Hash Table.
-    // Returns true if the operation is successful.
-    bool removeItem( string itemKey );
+    /**
+     * @brief Metodo elimina el item segun el pItemKey
+     * @param string pItemKey
+     * @return bool
+     */
+    bool removeItem( string pItemKey );
 
     // Returns an item from the Hash Table by key.
     // If the item isn't found, a null pointer is returned.
-    NodoSimple<AnyType> * getItemByKey( string itemKey );
+    /**
+     * @brief Metodo busca el elemento segun el pItemKey
+     * @param string pItemKey
+     * @return nodoSimple<AnyType>*
+     */
+    NodoSimple<AnyType> * getItemByKey( string pItemKey );
 
     /**
-     * @brief Metodo devuelve el dato
-     * @param pItemKey
-     * @return <class AnyType>
+     * @brief Metodo devuelve el dato segun pItemKey
+     * @param string pItemKey
+     * @return AnyType*
      */
     AnyType* getDataByKey(string pItemKey);
 
     /**
      * @brief Metodo devuelve el nado numero pNumElem
-     * @param pNumElem
-     * @return NodoSimple<AnyType>
+     * @param int pNumElem
+     * @return NodoSimple<AnyType>*
      */
     NodoSimple<AnyType>* getItemByNumElem(int pNumElem);
 
-    // Display the contents of the Hash Table to console window.
+    /**
+     * @brief Metodo imprime la tabla
+     */
     void printTable();
 
-    // Prints a histogram illustrating the Item distribution.
+    /**
+     * @brief imprime el histograma con la informacion
+     */
     void printHistogram();
 
-    // Returns the number of locations in the Hash Table.
+    /**
+     * @brief Metodo devuelve el atributo /_Length
+     * @return int
+     */
     int getLength();
 
-    // Returns the number of Items in the Hash Table.
+    /**
+     * @brief Metodo develve la cantidad de elementos
+     * @return int
+     */
     int getNumberOfItems();
 
-    // De-allocates all memory used for the Hash Table.
+    /**
+     * @brief Metodo destructor de HashTable
+     */
     ~HashTable();
 };
 
-
-// Constructs the empty Hash Table object.
-// Array length is set to 13 by default.
 template<class AnyType>
 HashTable<AnyType>::HashTable( int tableLength )
 {
@@ -94,7 +107,6 @@ HashTable<AnyType>::HashTable( int tableLength )
     length = tableLength;
 }
 
-// Returns an array location for a given item key.
 template<class AnyType>
 int HashTable<AnyType>::hash( string itemKey )
 {
@@ -104,16 +116,13 @@ int HashTable<AnyType>::hash( string itemKey )
     return (value * itemKey.length() ) % length;
 }
 
-// Adds an item to the Hash Table.
 template<class AnyType>
 void HashTable<AnyType>::insertItem( NodoSimple<AnyType> * newItem )
 {
-    int index = hash( newItem -> key );
+    int index = hash( newItem->getKey());
     array[ index ].insertItem( newItem );
 }
 
-// Deletes an Item by key from the Hash Table.
-// Returns true if the operation is successful.
 template<class AnyType>
 bool HashTable<AnyType>::removeItem( string itemKey )
 {
@@ -121,8 +130,6 @@ bool HashTable<AnyType>::removeItem( string itemKey )
     return array[ index ].removeItem( itemKey );
 }
 
-// Returns an item from the Hash Table by key.
-// If the item isn't found, a null pointer is returned.
 template<class AnyType>
 NodoSimple<AnyType> * HashTable<AnyType>::getItemByKey( string itemKey )
 {
@@ -144,12 +151,11 @@ NodoSimple<AnyType>* HashTable<AnyType>::getItemByNumElem(int pNumElem){
 		elem = elem +array[index].getLength();
 		index++;
 	}
-	elem = elem - array[index].getLength() - pNumElem;
 	index--;
-	return array[index].getItemByPosition(elem+1);
+	elem = pNumElem - (elem - array[index].getLength());
+	return array[index].getItemByPosition(elem);
 }
 
-// Display the contents of the Hash Table to console window.
 template<class AnyType>
 void HashTable<AnyType>::printTable()
 {
@@ -161,7 +167,6 @@ void HashTable<AnyType>::printTable()
     }
 }
 
-// Prints a histogram illustrating the Item distribution.
 template<class AnyType>
 void HashTable<AnyType>::printHistogram()
 {
@@ -176,14 +181,12 @@ void HashTable<AnyType>::printHistogram()
     }
 }
 
-// Returns the number of locations in the Hash Table.
 template<class AnyType>
 int HashTable<AnyType>::getLength()
 {
     return length;
 }
 
-// Returns the number of Items in the Hash Table.
 template<class AnyType>
 int HashTable<AnyType>::getNumberOfItems()
 {
@@ -195,7 +198,6 @@ int HashTable<AnyType>::getNumberOfItems()
     return itemCount;
 }
 
-// De-allocates all memory used for the Hash Table.
 template<class AnyType>
 HashTable<AnyType>::~HashTable()
 {
@@ -203,7 +205,3 @@ HashTable<AnyType>::~HashTable()
 }
 
 #endif
-
-//*****************************************************************
-// End of File
-//*****************************************************************
