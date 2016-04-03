@@ -5,16 +5,6 @@
  * @brief Abstracion de una lista simple para el proyecto xC++2
  */
 
-//*****************************************************************
-//  LinkedList.h
-//  HashTable
-//
-//  Created by Karlina Beringer on June 16, 2014.
-//
-//  This header file contains the Linked List class declaration.
-//  Hash Table array elements consist of Linked List objects.
-//*****************************************************************
-
 #ifndef LinkedList_h
 #define LinkedList_h
 
@@ -110,14 +100,14 @@ void LinkedList<AnyType>::insertItem( NodoSimple<AnyType> * newItem )
         this->_Length++;
         return;
     }
-    NodoSimple<AnyType> * p = this->_Head;
-    NodoSimple<AnyType> * q = this->_Head;
-    while (q)
+    NodoSimple<AnyType> * aux1 = this->_Head;
+    NodoSimple<AnyType> * aux2 = this->_Head;
+    while (aux2)
     {
-        p = q;
-        q = p->getNext();
+        aux1 = aux2;
+        aux2 = aux1->getNext();
     }
-    p->setNext(newItem);
+    aux1->setNext(newItem);
 
     newItem->setNext(NULL);
     this->_Length++;
@@ -133,19 +123,19 @@ template<class AnyType>
 bool LinkedList<AnyType>::removeItem( string itemKey )
 {
     if (!_Head->getNext()) return false;
-    NodoSimple<AnyType> * p = this->_Head;
-    NodoSimple<AnyType> * q = this->_Head;
-    while (q)
+    NodoSimple<AnyType> * aux1 = this->_Head;
+    NodoSimple<AnyType> * aux2 = this->_Head;
+    while (aux2)
     {
-        if (q->getKey() == itemKey)
+        if (aux2->getKey() == itemKey)
         {
-            p->setNext(q->getNext);
+            aux1->setNext(aux2->getNext);
             free (q);
             this->_Length--;
             return true;
         }
-        p = q;
-        q = p->getNext();
+        aux1 = aux2;
+        aux2 = aux1->getNext();
     }
     return false;
 }
@@ -153,14 +143,14 @@ bool LinkedList<AnyType>::removeItem( string itemKey )
 template<class AnyType>
 NodoSimple<AnyType> * LinkedList<AnyType>::getItem( string itemKey )
 {
-    NodoSimple<AnyType> * p = this->_Head;
-    NodoSimple<AnyType> * q = this->_Head;
-    while (q)
+    NodoSimple<AnyType> * aux1 = this->_Head;
+    NodoSimple<AnyType> * aux2 = this->_Head;
+    while (aux2)
     {
-        p = q;
-        if ((p != this->_Head) && (p->getKey() == itemKey))
-            return p;
-        q = p->getNext();
+        aux1 = aux2;
+        if ((aux1 != this->_Head) && (aux1->getKey() == itemKey))
+            return aux1;
+        aux2 = aux1->getNext();
     }
     return NULL;
 }
@@ -188,19 +178,19 @@ void LinkedList<AnyType>::printList()
         cout << "\n{ }\n";
        return;
     }
-    NodoSimple<AnyType> * p = this->_Head;
-    NodoSimple<AnyType> * q = this->_Head;
+    NodoSimple<AnyType> * aux1 = this->_Head;
+    NodoSimple<AnyType> * aux2 = this->_Head;
     cout << "\n{ ";
     while (q)
     {
-        p = q;
-        if (p != this->_Head)
+    	aux1 = aux2;
+        if (aux1 != this->_Head)
         {
-            cout << (void*)p->getVal() << ":"<< p->getKey(); //AQUI CAMBIE KEY POR VAL
-            if (p->getNext()) cout << ", ";
+            cout << (void*)aux1->getVal() << ":"<< aux1->getKey(); //AQUI CAMBIE KEY POR VAL
+            if (aux1->getNext()) cout << ", ";
             else cout << " ";
         }
-        q = p->getNext();
+        aux2 = aux1->getNext();
     }
     cout << "}\n";
 }
@@ -214,13 +204,13 @@ int LinkedList<AnyType>::getLength()
 template<class AnyType>
 LinkedList<AnyType>::~LinkedList()
 {
-    NodoSimple<AnyType> * p = this->_Head;
-    NodoSimple<AnyType> * q = this->_Head;
-    while (q)
+    NodoSimple<AnyType> * aux1 = this->_Head;
+    NodoSimple<AnyType> * aux2 = this->_Head;
+    while (aux2)
     {
-        p = q;
-        q = p->getNext();
-        if (q) delete p;
+    	aux1 = aux2;
+    	aux2 = aux1->getNext();
+        if (aux2) delete aux1;
     }
 }
 
