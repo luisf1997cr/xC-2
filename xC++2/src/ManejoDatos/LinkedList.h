@@ -1,3 +1,10 @@
+/**
+ * @file LinkedList.h
+ * @date 4/3/16
+ * @title LinkedList
+ * @brief Abstracion de una lista simple para el proyecto xC++2
+ */
+
 //*****************************************************************
 //  LinkedList.h
 //  HashTable
@@ -17,109 +24,103 @@ using namespace std;
 
 #include "NodoSimple.h"
 
-//*****************************************************************
-// List items are keys with pointers to the next item.
-//*****************************************************************
-/*
- * struct NodoSimple
-{
-    string key;
-    NodoSimple * next;
-};
-**/
-//*****************************************************************
-// Linked lists store a variable number of items.
-//*****************************************************************
 template<class AnyType>
 class LinkedList
 {
 private:
-    // Head is a reference to a list of data nodes.
-    NodoSimple<AnyType> * head;
-
-    // Length is the number of data nodes.
-    int length;
+    NodoSimple<AnyType> * _Head;
+    int _Length;
 
 public:
-    // Constructs the empty linked list object.
-    // Creates the head node and sets length to zero.
+    /**
+     * @brief Metodo constructor de LinkedList
+     */
     LinkedList();
 
-    // Inserts an item at the end of the list.
-    void insertItem( NodoSimple<AnyType> * newItem);
+    /**
+     * @brief Metodo inserta un nodo en la lista
+     * @param NodoSimple<AnyType>* pNewItem
+     */
+    void insertItem( NodoSimple<AnyType> * pNewItem);
 
     /**
-     * @breif Metodo inserta el dato a la lista
-     * @param pItem Item a ingresar
+     * @breif Metodo inserta un elemento a la lista
+     * @param AnyType* pItem
      */
     void insertItem(AnyType* pItem);
 
-    // Removes an item from the list by item key.
-    // Returns true if the operation is successful.
-    bool removeItem( string itemKey );
+    /**
+     * @brief Metodo elimina el elemento de la lista que contenga el mismo pItemKey
+     * @param string pItemKey
+     */
+    bool removeItem( string pItemKey );
 
-    // Searches for an item by its key.
-    // Returns a reference to first match.
-    // Returns a NULL pointer if no match is found.
-    NodoSimple<AnyType> * getItem( string itemKey );
+    /**
+     * @brief Metodo obtiene el elemento que contiene el mismo pItemKey
+     * @param string pItemKey
+     * @return NodoSimple<AnyType>*
+     */
+    NodoSimple<AnyType> * getItem( string pItemKey );
 
     /**
      * @brief Metodo devuelve el nodo en la posicion
-     * @param pPosition Posicion
-     * @return NodoSimple<AnyType>
+     * @param int pPosition
+     * @return NodoSimple<AnyType>*
      */
     NodoSimple<AnyType> * getItemByPosition(int pPosition);
 
     /**
      * @brief Metodo devuelve el dato segun la clave
-     * @param pItemKey Clave con la que se encuentra guardada
-     * @return <class AnyType> Dato de la lista
+     * @param string pItemKey
+     * @return AnyType*
      */
     AnyType* getDataItem(string pItemKey);
 
-    bool isEmpyte();
-
-    // Displays list contents to the console window.
+    /**
+     * @brief Metodo imprime la lista
+     */
     void printList();
 
-    // Returns the length of the list.
+    /**
+     * @brief Metodo devuelve el atributo _Lenght
+     * @return int
+     */
     int getLength();
 
-    // De-allocates list memory when the program terminates.
+    /**
+     * @brief Metodo destructor de LinkedList
+     */
     ~LinkedList();
 };
 
 
-// Constructs the empty linked list object.
-// Creates the head node and sets length to zero.
 template<class AnyType>
 LinkedList<AnyType>::LinkedList()
 {
-    head = new NodoSimple<AnyType>{"c", NULL , NULL};
-    length = 0;
+    this->_Head = new NodoSimple<AnyType>{"c",NULL,NULL};
+    this->_Length = 0;
 }
 
-// Inserts an item at the end of the list.
 template <class AnyType>
 void LinkedList<AnyType>::insertItem( NodoSimple<AnyType> * newItem )
 {
-    if (!head -> next)
+    if (!_Head->getNext())
     {
-        head -> next = newItem;
-        length++;
+        _Head->setNext(newItem);
+        this->_Length++;
         return;
     }
-    NodoSimple<AnyType> * p = head;
-    NodoSimple<AnyType> * q = head;
+    NodoSimple<AnyType> * p = this->_Head;
+    NodoSimple<AnyType> * q = this->_Head;
     while (q)
     {
         p = q;
-        q = p -> next;
+        q = p->getNext();
     }
-    p -> next = newItem;
+    p->setNext(newItem);
 
-    newItem -> next = NULL;
-    length++;
+    newItem->setNext(NULL);
+    this->_Length++;
 }
 
 template<class AnyType>
@@ -128,53 +129,47 @@ void LinkedList<AnyType>::insertItem(AnyType* pItem){
 	insertItem(nodo);
 }
 
-// Removes an item from the list by item key.
-// Returns true if the operation is successful.
 template<class AnyType>
 bool LinkedList<AnyType>::removeItem( string itemKey )
 {
-    if (!head -> next) return false;
-    NodoSimple<AnyType> * p = head;
-    NodoSimple<AnyType> * q = head;
+    if (!_Head->getNext()) return false;
+    NodoSimple<AnyType> * p = this->_Head;
+    NodoSimple<AnyType> * q = this->_Head;
     while (q)
     {
-        if (q -> key == itemKey)
+        if (q->getKey() == itemKey)
         {
-            p -> next = q -> next;
+            p->setNext(q->getNext);
             free (q);
-            length--;
+            this->_Length--;
             return true;
         }
         p = q;
-        q = p -> next;
+        q = p->getNext();
     }
     return false;
 }
 
-// Searches for an item by its key.
-// Returns a reference to first match.
-// Returns a NULL pointer if no match is found.
 template<class AnyType>
 NodoSimple<AnyType> * LinkedList<AnyType>::getItem( string itemKey )
 {
-    NodoSimple<AnyType> * p = head;
-    NodoSimple<AnyType> * q = head;
+    NodoSimple<AnyType> * p = this->_Head;
+    NodoSimple<AnyType> * q = this->_Head;
     while (q)
     {
         p = q;
-        if ((p != head) && (p -> key == itemKey))
+        if ((p != this->_Head) && (p->getKey() == itemKey))
             return p;
-        q = p -> next;
+        q = p->getNext();
     }
     return NULL;
 }
 
-
 template<class AnyType>
 NodoSimple<AnyType>* LinkedList<AnyType>::getItemByPosition(int pPosition){
-	NodoSimple<AnyType>* nodo = this->head;
+	NodoSimple<AnyType>* nodo = this->_Head;
 	for(int index = 1; index < pPosition+1; index++){
-		nodo = nodo->next;
+		nodo = nodo->getNext();
 	}
 	return nodo;
 }
@@ -182,58 +177,51 @@ NodoSimple<AnyType>* LinkedList<AnyType>::getItemByPosition(int pPosition){
 template<class AnyType>
 AnyType* LinkedList<AnyType>::getDataItem(string pItemKey){
 	NodoSimple<AnyType>* nodo = getItem(pItemKey);
-	return nodo->val;
+	return nodo->getVal();
 }
 
-// Displays list contents to the console window.
 template<class AnyType>
 void LinkedList<AnyType>::printList()
 {
-    if (length == 0)
+    if (this->_Length == 0)
     {
         cout << "\n{ }\n";
-        return;
+       return;
     }
-    NodoSimple<AnyType> * p = head;
-    NodoSimple<AnyType> * q = head;
+    NodoSimple<AnyType> * p = this->_Head;
+    NodoSimple<AnyType> * q = this->_Head;
     cout << "\n{ ";
     while (q)
     {
         p = q;
-        if (p != head)
+        if (p != this->_Head)
         {
-            cout << p -> val << ":"<< p->key; //AQUI CAMBIE KEY POR VAL
-            if (p -> next) cout << ", ";
+            cout << (void*)p->getVal() << ":"<< p->getKey(); //AQUI CAMBIE KEY POR VAL
+            if (p->getNext()) cout << ", ";
             else cout << " ";
         }
-        q = p -> next;
+        q = p->getNext();
     }
     cout << "}\n";
 }
 
-// Returns the length of the list.
 template<class AnyType>
 int LinkedList<AnyType>::getLength()
 {
-    return length;
+    return this->_Length;
 }
 
-// De-allocates list memory when the program terminates.
 template<class AnyType>
 LinkedList<AnyType>::~LinkedList()
 {
-    NodoSimple<AnyType> * p = head;
-    NodoSimple<AnyType> * q = head;
+    NodoSimple<AnyType> * p = this->_Head;
+    NodoSimple<AnyType> * q = this->_Head;
     while (q)
     {
         p = q;
-        q = p -> next;
+        q = p->getNext();
         if (q) delete p;
     }
 }
 
 #endif
-
-//*****************************************************************
-// End of File
-//*****************************************************************
