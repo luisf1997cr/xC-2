@@ -26,16 +26,16 @@ xMemoryManager::xMemoryManager() {
 xPointer xMemoryManager::xMalloc(int pSize){
 	for (int index = 1; index <= _Memoria->getNumberOfItems(); index++ ){
 		NodoSimple<xPointer>* nodoSpace = _Memoria->getItemByNumElem(index);
-		if(nodoSpace->val->getReference() == -1){    //status libre
-			long int size = nodoSpace->val->getPointerSize();
+		if(nodoSpace->getVal()->getReference() == -1){    //status libre
+			long int size = nodoSpace->getVal()->getPointerSize();
 			if (size >= pSize){
 				xPointer newSpace;
 				cout << newSpace->getId() << endl;
 				newSpace.setReference(-1);
-				nodoSpace->val->setReference(1);
+				nodoSpace->getVal()->setReference(1);
 				newSpace.setPointerSize(size - pSize);
-				nodoSpace->val->setPointerSize(pSize);
-				newSpace.setTopPointer(nodoSpace->val->getTopPointer() + pSize);
+				nodoSpace->getVal()->setPointerSize(pSize);
+				newSpace.setTopPointer(nodoSpace->getVal()->getTopPointer() + pSize);
 				std::string key;
 				std::stringstream out;
 				char* buff = new char[225];
@@ -44,7 +44,7 @@ xPointer xMemoryManager::xMalloc(int pSize){
 				cout <<"mallocid" << newSpace->getId() << endl;
 				cout <<"malloc" << out.str() << endl;
 				_Memoria->insertItem(new NodoSimple<xPointer>{out.str(),new xPointer(newSpace),NULL});
-				return *nodoSpace->val;
+				return *nodoSpace->getVal();
 			}
 		}
 	}
@@ -60,7 +60,7 @@ bool xMemoryManager::xFree(xPointer pXPointer){
 	strcpy(buff,out.str().c_str());
 	out << pXPointer->getId();
 	NodoSimple<xPointer> nodo = *_Memoria->getItemByKey(out.str());
-	cout << nodo.val->getTopPointer() << endl;
+	cout << nodo.getVal()->getTopPointer() << endl;
 //	if(nodo.val->getReference() == 1){
 //		if(nodo.next->val->getReference() == -1){
 //			nodo.val->setPointerSize(nodo.next->val->getPointerSize());
