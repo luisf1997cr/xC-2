@@ -44,16 +44,26 @@ class xMemoryNode
 
 	const int portNumber;
 	int memorySpace;
-	char diskUbication;
+	string diskUbication;
 	int priority;
 
 
   public:
-	xMemoryNode(int numeroDePuerto,int espacioDeMemoria, char ubicacionDeDisco,int preoridaDeMemoria);
+	xMemoryNode(int numeroDePuerto,int espacioDeMemoria, string ubicacionDeDisco,int preoridaDeMemoria);
 	~xMemoryNode();
     TCPStream* connect(const char* ipNumber);
-    TCPStream* connect(const char* server, int port, int timeout);
+    TCPStream* connect(const char* server, int timeout);
     
+  public:
+    int getPortNumber();
+    int getMemorySpace();
+    string getdiskUbication();
+    int getPriority();
+    void setPortNumber(int numeroDePuerto);
+    void setMemorySpace(int espacioDeMemoria);
+    void setdiskUbication(string ubicacionDeDisco);
+    void setPriority(int preoridaDeMemoria);
+
   private:
     int resolveHostName(const char* host, struct in_addr* addr);
 

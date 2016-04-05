@@ -24,7 +24,7 @@
 
 #include "tcpconnector.h"
 
-xMemoryNode::xMemoryNode(int numeroDePuerto,int espacioDeMemoria, char ubicacionDeDisco,int preoridaDeMemoria){
+xMemoryNode::xMemoryNode(int numeroDePuerto,int espacioDeMemoria, string ubicacionDeDisco,int preoridaDeMemoria){
 	this->portNumber=numeroDePuerto;
 	this->memorySpace=espacioDeMemoria;
 	this->diskUbication=ubicacionDeDisco;
@@ -67,8 +67,9 @@ TCPStream* xMemoryNode::connect(const char* ipNumber)
     return new TCPStream(socket, &address);
 }
 
-TCPStream* xMemoryNode::connect(const char* server, int port, int timeout)
+TCPStream* xMemoryNode::connect(const char* server, int timeout)
 {
+	int port=portNumber;
     if (timeout == 0) return connect(server);
     
     struct sockaddr_in address;
@@ -147,3 +148,37 @@ int xMemoryNode::resolveHostName(const char* hostname, struct in_addr* addr)
     }
     return result;
 }
+
+int xMemoryNode::getPortNumber(){
+	return this->portNumber;
+
+}
+
+int xMemoryNode::getMemorySpace(){
+	return this->memorySpace;
+}
+
+string xMemoryNode::getdiskUbication(){
+	return this->diskUbication;
+}
+
+int xMemoryNode::getPriority(){
+	return this->priority;
+}
+
+void xMemoryNode::setPortNumber(int numeroDePuerto){
+	this->portNumber=numeroDePuerto;
+}
+
+void xMemoryNode::setMemorySpace(int espacioDeMemoria){
+	this->memorySpace=espacioDeMemoria;
+}
+
+void xMemoryNode::setdiskUbication(string ubicacionDeDisco){
+	this->diskUbication=ubicacionDeDisco;
+}
+
+void xMemoryNode::setPriority(int preoridaDeMemoria){
+	this->priority=preoridaDeMemoria;
+}
+
