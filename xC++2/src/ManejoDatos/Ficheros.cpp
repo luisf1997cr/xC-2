@@ -69,12 +69,15 @@ char* Ficheros::extraerParametrosInclude (char pline[], int plarge)
 	int i=0;
 	int y = strlen(pline)-(plarge);
 	static char NuevoCharLine[30];
+	NuevoCharLine[i] = '"';
+	i++;
 	while(i<y){
 		NuevoCharLine[i] = pline[i];
 		i = i+1;
 	}
 	cout<< "sali" <<endl;
-	NuevoCharLine[y] = 0;
+	NuevoCharLine[y] = '"';
+	NuevoCharLine[y+1] = 0;
 	return NuevoCharLine;
 
 }
@@ -85,7 +88,7 @@ void Ficheros::leerEnFicheroPrepro(char pnameArchive[], char pBusscar[]) {
 	if (myfile.is_open()){
 		string s;
 		int numLine = 0;
-		LinkedList<char*>* listaresult = new LinkedList<char*>;
+		LinkedList<char>* listaresult = new LinkedList<char>;
 		while(getline(myfile,s)){
 			numLine = numLine+1;
 			char line[s.length()];
@@ -97,27 +100,48 @@ void Ficheros::leerEnFicheroPrepro(char pnameArchive[], char pBusscar[]) {
 
 				cout <<e<<endl;
 
-				listaresult->insertItem(&e);
+				listaresult->insertData(e);
 				//escribirEnFicheroExistente(pnameArchive, e);
+				int i=0;
+				int y = strlen(pnameArchive)-1;
+				static char NuevoCharLine[30];
+				while(i<y){
+					NuevoCharLine[i] = pnameArchive[i];
+					i = i+1;
+				}
+				NuevoCharLine[y] = 'c';
+				NuevoCharLine[y+1] = 'p';
+				NuevoCharLine[y+2] = 'p';
+				NuevoCharLine[y+3] = 0;
+				pnameArchive = NuevoCharLine;
+				escribirEnFicheroExistente(pnameArchive, "xJson* xObject::serialize(){");
+				escribirEnFicheroExistente(pnameArchive, "Json::Value valorJson;");
+				escribirEnFicheroExistente(pnameArchive, "Json::StyledWriter escritor;");
+				int indice = 0;//lleva el indice de la lista de lo que leyo cada include
+				stringstream convert;//conversor del indice de int a char*
+				convert<<indice;
+				const char* parametro = convert.str().c_str();//parametro en forma de char*
+				while(indice < listaresult->getLength()){
+					const char* inicio = "valorJson [""\"""param";
+					const char* medio = "\"""] = ";
+					const char* final = ";";
+					char* buff = new char[250];
+					strcpy(buff, inicio);
+					strcat(buff, parametro);
+					strcat(buff, medio);
+					strcat(buff, listaresult->getItemByPosition(indice+1)->getVal());
+					strcat(buff, final);
+					escribirEnFicheroExistente(pnameArchive, buff);
+					indice++;
+					convert<<indice;
+					parametro = convert.str().c_str();
 
-			}
+				}
 			cout<<"Numero de linea en archivo: " <<numLine<<endl;
+			escribirEnFicheroExistente(pnameArchive, "}");
 		}
-		escribirEnFicheroExistente(pnameArchive, "xJson* xObject::serialize(){");
-		escribirEnFicheroExistente(pnameArchive, "Json::Value valorJson;");
-		escribirEnFicheroExistente(pnameArchive, "Json::StyledWriter escritor;");
-		int indice = 0;//lleva el indice de la lista de lo que leyo cada include
-		stringstream convert;//conversor del indice de int a char*
-		convert<<indice;
-		const char* parametro = convert.str().c_str();//parametro en forma de char*
-		while(indice < listaresult->getLength()){
-			//escribirEnFicheroExistente(pnameArchive, "valorJson [param"+parametro+"] = "+listaresult->getItemByPosition(indice)+";");
-			indice++;
-			convert<<indice;
-			parametro = convert.str().c_str();
 
 		}
-		escribirEnFicheroExistente(pnameArchive, "}");
 
 		cout << "listo leido"<< endl;
 		myfile.close();
