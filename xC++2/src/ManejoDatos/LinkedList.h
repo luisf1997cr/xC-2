@@ -37,7 +37,7 @@ public:
      * @breif Metodo inserta un elemento a la lista
      * @param AnyType* pItem
      */
-    void insertItem(AnyType* pItem);
+    void insertData(AnyType* pItem);
 
     /**
      * @brief Metodo elimina el elemento de la lista que contenga el mismo pItemKey
@@ -114,7 +114,7 @@ void LinkedList<AnyType>::insertItem( NodoSimple<AnyType> * newItem )
 }
 
 template<class AnyType>
-void LinkedList<AnyType>::insertItem(AnyType* pItem){
+void LinkedList<AnyType>::insertData(AnyType* pItem){
 	NodoSimple<AnyType> *nodo = new NodoSimple<AnyType>{"c", pItem, NULL};
 	insertItem(nodo);
 }
@@ -130,7 +130,7 @@ bool LinkedList<AnyType>::removeItem( string itemKey )
         if (aux2->getKey() == itemKey)
         {
             aux1->setNext(aux2->getNext);
-            free (q);
+            free (aux2);
             this->_Length--;
             return true;
         }
@@ -181,7 +181,7 @@ void LinkedList<AnyType>::printList()
     NodoSimple<AnyType> * aux1 = this->_Head;
     NodoSimple<AnyType> * aux2 = this->_Head;
     cout << "\n{ ";
-    while (q)
+    while (aux2)
     {
     	aux1 = aux2;
         if (aux1 != this->_Head)
