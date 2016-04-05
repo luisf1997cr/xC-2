@@ -36,7 +36,8 @@ public:
 	 */
 	long int getId();
 
-
+	xJson* serialize();
+	
 private:
 	static long int _Id;
 };
