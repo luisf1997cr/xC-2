@@ -32,7 +32,7 @@ int main()
     int len;
     string message;
     char line[256];
-    TCPConnector* connector = new TCPConnector();
+    xMemoryNode* connector = new xMemoryNode();
     TCPStream* stream = connector->connect("127.0.0.1",8080);
     if (stream) {
         message = "Sirve la conexion?";

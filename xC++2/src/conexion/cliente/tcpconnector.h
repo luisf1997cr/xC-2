@@ -25,16 +25,39 @@
 #define __tcpconnector_h__
 
 #include <netinet/in.h>
+#include <string.h>
+#include <stdio.h>
+#include <string.h>
+#include <netdb.h>
+#include <arpa/inet.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <pthread.h>
 #include "../conexion/tcpstream.h"
+#include "../conexion/ClientConstants.h"
 
-class TCPConnector
+
+
+class xMemoryNode
 {
   public:
-    TCPStream* connect(const char* server, int port);
+
+	const int portNumber;
+	int memorySpace;
+	char diskUbication;
+	int priority;
+
+
+  public:
+	xMemoryNode(int numeroDePuerto,int espacioDeMemoria, char ubicacionDeDisco,int preoridaDeMemoria);
+	~xMemoryNode();
+    TCPStream* connect(const char* ipNumber);
     TCPStream* connect(const char* server, int port, int timeout);
     
   private:
     int resolveHostName(const char* host, struct in_addr* addr);
+
+
 };
 
 #endif

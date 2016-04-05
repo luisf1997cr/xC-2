@@ -21,42 +21,55 @@
    limitations under the License
 */
 
-#include <stdio.h>
-#include <string.h>
-#include <netdb.h>
-#include <arpa/inet.h>
-#include <fcntl.h>
-#include <errno.h>
+
 #include "tcpconnector.h"
 
-TCPStream* TCPConnector::connect(const char* server, int port)
-{
-    struct sockaddr_in address;
+xMemoryNode::xMemoryNode(int numeroDePuerto,int espacioDeMemoria, char ubicacionDeDisco,int preoridaDeMemoria){
+	this->portNumber=numeroDePuerto;
+	this->memorySpace=espacioDeMemoria;
+	this->diskUbication=ubicacionDeDisco;
+	this->priority=preoridaDeMemoria;
+}
+xMemoryNode::~xMemoryNode(){}
 
+TCPStream* xMemoryNode::connect(const char* ipNumber)
+{
+	int port=portNumber;
+    struct sockaddr_in address;
+    /*
+     * @brief Se configura la informacion del socket
+     */
     memset (&address, 0, sizeof(address));
     address.sin_family = AF_INET;
-    address.sin_port = port;
-    if (resolveHostName(server, &(address.sin_addr)) != 0 ) {
-        inet_pton(PF_INET, server, &(address.sin_addr));        
+    address.sin_port = htons(port);
+    if (resolveHostName(ipNumber, &(address.sin_addr)) != 0 ) {
+        inet_pton(PF_INET, ipNumber, &(address.sin_addr));
     } 
 
-    // Create and connect the socket, bail if we fail in either case
-    int sd = socket(AF_INET, SOCK_STREAM, 0);
-    if (sd < 0) {
-        perror("socket() failed");
+    /*
+     * @brief Crea el socket, y valida si se este se creo correctamente.
+     * @Return Retorna null si el socket no se creo.
+     */
+    int socket = socket(AF_INET, SOCK_STREAM, 0);
+    if (socket < 0) {
+        perror*(ClientConstants::ERROR_SOCKET);
         return NULL;
     }
-    if (::connect(sd, (struct sockaddr*)&address, sizeof(address)) != 0) {
-        perror("connect() failed");
-        close(sd);
+    /*
+         * @brief Confirma la conexion con el servidor.
+         * @Return Retorna null si el socket no se creo.
+         */
+    if (::connect(socket, (struct sockaddr*)&address, sizeof(address)) != 0) {
+        perror*(ClientConstants::ERROR_CONECTAR);
+        close(socket);
         return NULL;
     }
-    return new TCPStream(sd, &address);
+    return new TCPStream(socket, &address);
 }
 
-TCPStream* TCPConnector::connect(const char* server, int port, int timeout)
+TCPStream* xMemoryNode::connect(const char* server, int port, int timeout)
 {
-    if (timeout == 0) return connect(server, port);
+    if (timeout == 0) return connect(server);
     
     struct sockaddr_in address;
 
@@ -75,7 +88,7 @@ TCPStream* TCPConnector::connect(const char* server, int port, int timeout)
     
     // Bail if we fail to create the socket
     if (sd < 0) {
-        perror("socket() failed");
+    	perror*(ClientConstants::ERROR_SOCKET);
         return NULL;
     }    
 
@@ -123,7 +136,7 @@ TCPStream* TCPConnector::connect(const char* server, int port, int timeout)
     return new TCPStream(sd, &address);
 }
 
-int TCPConnector::resolveHostName(const char* hostname, struct in_addr* addr) 
+int xMemoryNode::resolveHostName(const char* hostname, struct in_addr* addr)
 {
     struct addrinfo *res;
   

@@ -104,7 +104,7 @@ TCPStream* TCPAcceptor::acceptSocket()
 }
 
 
-void* Server::controlador(void* pObjeto){
+void* TCPAcceptor::controlador(void* pObjeto){
 	 TCPStream* stream = NULL;
 	 string mensaje;
 	 if (start() == 0) {
@@ -127,13 +127,13 @@ void* Server::controlador(void* pObjeto){
 	pthread_exit(NULL);
 }
 
-void Server::sendinfo(const char* pMensaje){
+void TCPAcceptor::sendinfo(const char* pMensaje){
 	for (int index = 0; index < this->_Clientes->len(); index++){
 		cout << ServerConstants::SENDINFO_MSJ << send(this->_Clientes->searchPosition(index),pMensaje,strlen(pMensaje),0);
 	}
 }
 
-string Server::getMensaje(){
+string TCPAcceptor::getMensaje(){
 	string mensaje = ServerConstants::NO_HAY_MSJ;
 	if(this->_Mensajes->isEmpty()){
 		mensaje = this->_Mensajes->searchBegin();
