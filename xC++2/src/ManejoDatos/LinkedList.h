@@ -72,6 +72,23 @@ public:
     void printList();
 
     /**
+     * @brief Metodo revisa si la lista se encuantra vacia
+     * @return true si todavia tiene datos y false si se encuentra vacia
+     */
+    bool isEmpty();
+
+    /**
+     * @brief Busca el primer elemento de la lista
+     * @return el elemento
+     */
+    void searchBegin();
+
+    /**
+     * @brief Elimina el primer elemento de la lista
+     */
+    void deleteAtBegin();
+
+    /**
      * @brief Metodo devuelve el atributo _Lenght
      * @return int
      */
@@ -193,6 +210,24 @@ void LinkedList<AnyType>::printList()
         aux2 = aux1->getNext();
     }
     cout << "}\n";
+}
+
+template<class AnyType>
+bool LinkedList<AnyType>::isEmpty(){
+	if(this->_Length==0){
+		return false;
+	}else{return true;}
+}
+
+template<class AnyType>
+void LinkedList<AnyType>::searchBegin(){
+	 if (this->_Length == 0)
+	    {
+	        cout << "\n{ }\n";
+	       return;
+	    }
+
+
 }
 
 template<class AnyType>

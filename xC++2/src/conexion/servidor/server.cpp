@@ -24,20 +24,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "tcpacceptor.h"
+#include <iostream>
 
 int main()
 {
 
-	int argc=3;
 
     TCPStream* stream = NULL;
     TCPAcceptor* acceptor = NULL;
-    if (argc == 3) {
-        acceptor = new TCPAcceptor(8080);
-    }
-    else {
-        acceptor = new TCPAcceptor(8080);
-    }
+    acceptor = new TCPAcceptor("123.01.01.1");
+    acceptor->start();
+    acceptor->acceptSocket();
+
+
+
     /**if (acceptor->start() == 0) {
         while (1) {
             stream = acceptor->accept();
@@ -53,6 +53,8 @@ int main()
             }
         }
     }*/
+    cout<< "hola">>
+
     exit(0);
 }
 

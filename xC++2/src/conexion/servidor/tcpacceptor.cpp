@@ -94,7 +94,7 @@ TCPStream* TCPAcceptor::acceptSocket()
     }else{
 		if(ServerConstants::DEBUG)
 			cout << ServerConstants::CONNECT << endl;
-		this->_Clientes->insertAtFinal(data._Conection);
+		this->_Clientes->insertData(&data._Conection);
     }
     pthread_t hilo;
     pthread_create(&hilo,0,Server::controlador,(void*)data);
@@ -126,17 +126,17 @@ void* TCPAcceptor::controlador(void* pObjeto){
 	    }
 	pthread_exit(NULL);
 }
-
+/*
 void TCPAcceptor::sendinfo(const char* pMensaje){
-	for (int index = 0; index < this->_Clientes->len(); index++){
-		cout << ServerConstants::SENDINFO_MSJ << send(this->_Clientes->searchPosition(index),pMensaje,strlen(pMensaje),0);
+	for (int index = 0; index < this->_Clientes->getLength(); index++){
+		cout << ServerConstants::SENDINFO_MSJ << send(this->_Clientes->getItemByPosition(index),pMensaje,strlen(pMensaje),0);
 	}
-}
+}*/
 
-string TCPAcceptor::getMensaje(){
+/*string TCPAcceptor::getMensaje(){
 	string mensaje = ServerConstants::NO_HAY_MSJ;
 	if(this->_Mensajes->isEmpty()){
 		mensaje = this->_Mensajes->searchBegin();
 		this->_Mensajes->deleteAtBegin();
 	}
-}
+}*/
