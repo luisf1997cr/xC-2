@@ -14,11 +14,12 @@
 #define SRC_XCLASS_XJSON_H_
 
 class xJson {
+private:
+	string _StringJson;
 public:
-	xJson();
+	xJson(string pString);
 	virtual ~xJson();
-	xJson* serialize(xObject pObjeto);
-	bool deserialize (xJson* pJson);
+	string getString();
 };
 
 #endif /* SRC_XCLASS_XJSON_H_ */
