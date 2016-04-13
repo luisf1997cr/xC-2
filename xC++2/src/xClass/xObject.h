@@ -20,7 +20,7 @@ public:
 	 */
 	xObject();
 	/**
-	 * @brief Metodo destrucgtor de xObject
+	 * @brief Metodo destructor de xObject
 	 */
 	virtual ~xObject();
 
@@ -37,6 +37,8 @@ public:
 	long int getId();
 
 	xJson* serialize();
+	
+	bool deserialize(xJson* pJson);
 	
 private:
 	static long int _Id;
