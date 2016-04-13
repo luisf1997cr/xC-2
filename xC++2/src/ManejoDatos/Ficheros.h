@@ -20,7 +20,7 @@
 
 using namespace std;
 
-class Ficheros {
+class Ficheros: public FicherosConstants{
 public:
 
 	/**
