@@ -138,6 +138,19 @@ void Ficheros::leerEnFicheroPrepro(char pnameArchive[], char pBusscar[]) {
 
 				}
 			cout<<"Numero de linea en archivo: " <<numLine<<endl;
+			escribirEnFicheroExistente(pnameArchive, "string sObjeto=escritor.write(valorJson);");
+			escribirEnFicheroExistente(pnameArchive, "xJson* pJson = new xJson(sObjeto);");
+			escribirEnFicheroExistente(pnameArchive, "return pJson;");
+			escribirEnFicheroExistente(pnameArchive, "}");
+			escribirEnFicheroExistente(pnameArchive, "bool xObject::deserialize(xJson* pJson){");
+			escribirEnFicheroExistente(pnameArchive, "Json::Value valorJson;");
+			escribirEnFicheroExistente(pnameArchive, "Json::Reader lector;");
+			escribirEnFicheroExistente(pnameArchive, "bool parsedSuccess = lector.parse(pJson->getString(),valorJson,false);");
+			escribirEnFicheroExistente(pnameArchive, "if(not parsedSuccess){");
+			escribirEnFicheroExistente(pnameArchive, "cout<<FicherosConstants::ERROR_AL_PARSEAR<<endl;");
+			escribirEnFicheroExistente(pnameArchive, "return 1;");
+			escribirEnFicheroExistente(pnameArchive, "}");
+			escribirEnFicheroExistente(pnameArchive, "return parsedSuccess;");
 			escribirEnFicheroExistente(pnameArchive, "}");
 		}
 
