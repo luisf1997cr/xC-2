@@ -24,6 +24,8 @@ public:
 	char LETRA_P = 'p';
 	int NUM_CERO = 0;
 	int NUM_UNO = 1;
+	int NUM_DOS = 2;
+	int NUM_TRES = 3;
 	int CHARLINE_SIZE = 30;
 	char SERIALIZAR_LN1[] = "xJson* xObject::serialize(){";
 	char SERIALIZAR_LN2[] = "Json::Value valorJson;";
@@ -48,6 +50,8 @@ public:
 	char CORCHETE[] = "}";
 	char DESERIALIZAR_LN8[] = "return parsedSuccess;";
 	char CORCHETE[] = "}";
+	unsigned char IS_FILE_VALOR= 0x8;
+	int NEWSD_SIZE = 100;
 		
 };
 
