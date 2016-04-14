@@ -110,14 +110,14 @@ void Ficheros::leerEnFicheroPrepro(char pnameArchive[], char pBusscar[]) {
 					i++;
 				}
 				NuevoCharLine[y] = FicherosConstants::LETRA_C;
-				NuevoCharLine[y+1] = 'p';
-				NuevoCharLine[y+2] = 'p';
-				NuevoCharLine[y+3] = 0;
+				NuevoCharLine[y+1] = FicherosConstants::LETRA_P;
+				NuevoCharLine[y+2] = FicherosConstants::LETRA_P;
+				NuevoCharLine[y+3] = FicherosConstants::NUM_CERO;
 				pnameArchive = NuevoCharLine;
-				escribirEnFicheroExistente(pnameArchive, "xJson* xObject::serialize(){");
-				escribirEnFicheroExistente(pnameArchive, "Json::Value valorJson;");
-				escribirEnFicheroExistente(pnameArchive, "Json::StyledWriter escritor;");
-				int indice = 0;//lleva el indice de la lista de lo que leyo cada include
+				escribirEnFicheroExistente(pnameArchive, FicherosConstants::SERIALIZAR_LN1);
+				escribirEnFicheroExistente(pnameArchive, FicherosConstants::SERIALIZAR_LN2);
+				escribirEnFicheroExistente(pnameArchive, FicherosConstants::SERIALIZAR_LN3);
+				int indice = FicherosConstants::NUM_CERO;//lleva el indice de la lista de lo que leyo cada include
 				stringstream convert;//conversor del indice de int a char*
 				convert<<indice;
 				const char* parametro = convert.str().c_str();//parametro en forma de char*
