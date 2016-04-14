@@ -37,6 +37,6 @@ float pXFloat::operator *(){
 
 void pXFloat::print(){
 	xPointer::print();
-	cout << "Tamaño: " << this->getPointerSize() << " Valor: " << (*this)->floatValue() << endl;
+	cout << xPointer::SIZE << this->getPointerSize() << xPointer::VALOR << (*this)->floatValue() << endl;
 }
 
