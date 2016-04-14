@@ -122,14 +122,14 @@ void Ficheros::leerEnFicheroPrepro(char pnameArchive[], char pBusscar[]) {
 				convert<<indice;
 				const char* parametro = convert.str().c_str();//parametro en forma de char*
 				while(indice < listaresult->getLength()){
-					const char* inicio = "valorJson [""\"""param";
-					const char* medio = "\"""] = ";
-					const char* final = ";";
-					char* buff = new char[250];
+					const char* inicio = FicherosConstants::SERIALIZAR_LN4;
+					const char* medio = FicherosConstants::SERIALIZAR_LN5";
+					const char* final = FicherosConstants::C_PUNTO_Y_COMA;
+					char* buff = new char[FicherosConstants::BUFF_SIZE];
 					strcpy(buff, inicio);
 					strcat(buff, parametro);
 					strcat(buff, medio);
-					strcat(buff, listaresult->getItemByPosition(indice+1)->getVal());
+					strcat(buff, listaresult->getItemByPosition(indice+FicherosConstants::NUM_UNO)->getVal());
 					strcat(buff, final);
 					escribirEnFicheroExistente(pnameArchive, buff);
 					indice++;
@@ -137,10 +137,10 @@ void Ficheros::leerEnFicheroPrepro(char pnameArchive[], char pBusscar[]) {
 					parametro = convert.str().c_str();
 
 				}
-			cout<<"Numero de linea en archivo: " <<numLine<<endl;
-			escribirEnFicheroExistente(pnameArchive, "string sObjeto=escritor.write(valorJson);");
-			escribirEnFicheroExistente(pnameArchive, "xJson* pJson = new xJson(sObjeto);");
-			escribirEnFicheroExistente(pnameArchive, "return pJson;");
+			cout<< FicherosConstants::MSJ_NUM_LINE <<numLine<<endl;
+			escribirEnFicheroExistente(pnameArchive, FicherosConstants::SERIALIZAR_LN6);
+			escribirEnFicheroExistente(pnameArchive, FicherosConstants::SERIALIZAR_LN7);
+			escribirEnFicheroExistente(pnameArchive, FicherosConstants::SERIALIZAR_LN8);
 			escribirEnFicheroExistente(pnameArchive, "}");
 			escribirEnFicheroExistente(pnameArchive, "bool xObject::deserialize(xJson* pJson){");
 			escribirEnFicheroExistente(pnameArchive, "Json::Value valorJson;");
