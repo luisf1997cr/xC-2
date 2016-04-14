@@ -110,9 +110,9 @@ void Ficheros::leerEnFicheroPrepro(char pnameArchive[], char pBusscar[]) {
 					i++;
 				}
 				NuevoCharLine[y] = FicherosConstants::LETRA_C;
-				NuevoCharLine[y+1] = FicherosConstants::LETRA_P;
-				NuevoCharLine[y+2] = FicherosConstants::LETRA_P;
-				NuevoCharLine[y+3] = FicherosConstants::NUM_CERO;
+				NuevoCharLine[y+FicherosConstants::NUM_UNO] = FicherosConstants::LETRA_P;
+				NuevoCharLine[y+FicherosConstants::NUM_DOS] = FicherosConstants::LETRA_P;
+				NuevoCharLine[y+FicherosConstants::NUM_TRES] = FicherosConstants::NUM_CERO;
 				pnameArchive = NuevoCharLine;
 				escribirEnFicheroExistente(pnameArchive, FicherosConstants::SERIALIZAR_LN1);
 				escribirEnFicheroExistente(pnameArchive, FicherosConstants::SERIALIZAR_LN2);
@@ -238,14 +238,14 @@ void Ficheros::LogicaDeIncludeDesserializar(char pline[]){
 int Ficheros::BuscarArchivosEnFolder (char pSourceDir[],char pBuscar[])
 {
 	int SiZe = sizeof(pSourceDir);
-	unsigned char isFile =0x8;
+	unsigned char isFile =FicherosConstants::IS_FILE_VALOR;
 	DIR *dp;
 	struct dirent *ep;
 	dp = opendir (pSourceDir);
 	if (dp != NULL)
 	{
 		while (ep = readdir (dp)){
-			char NewSD[100] ={};
+			char NewSD[FicherosConstants::NEWSD_SIZE] ={};
 			strcat(NewSD, pSourceDir);
 			 if ( ep->d_type == isFile)
 			   {
@@ -256,9 +256,9 @@ int Ficheros::BuscarArchivosEnFolder (char pSourceDir[],char pBuscar[])
 		(void) closedir (dp);
 	}
 	else
-		perror ("Couldn't open the directory");
+		perror (FicherosConstants::ERROR_AL_ENCONTRAR);
 
-	return 0;
+	return FicherosConstants::NUM_CERO;
 }
 
 
