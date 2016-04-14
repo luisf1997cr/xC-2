@@ -13,7 +13,7 @@
 
 using namespace std;
 
-class xPointer{
+class xPointer: public PConstants{
 public:
 	/**
 	 * @brief Metodo constructor de xPointer
