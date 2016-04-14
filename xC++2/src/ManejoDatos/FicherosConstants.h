@@ -19,11 +19,34 @@ public:
 	const char* MSJ_SALIR = "Sali";
 	const char* MSJ_ARCHIVO_ENCONTRADO = "Found a File : ";
 	const char* ERROR_AL_ENCONTRAR = "Couldn't open the directory";
-	const char* MSJ_SALIR = "Sali";
-	const char* MSJ_SALIR = "Sali";
-	const char* MSJ_SALIR = "Sali";
-	const char* MSJ_SALIR = "Sali";
-	const char* MSJ_SALIR = "Sali";
+	const char LETRA_C = 'c';
+	const char LETRA_P = 'p';
+	int NUM_CERO = 0;
+	int NUM_MUNO = -1;
+	int CHARLINE_SIZE = 30;
+	char SERIALIZAR_LN1[] = "xJson* xObject::serialize(){";
+	char SERIALIZAR_LN2[] = "Json::Value valorJson;";
+	char SERIALIZAR_LN3[] = "Json::StyledWriter escritor;";
+	const char* SERIALIZAR_LN4[] = "valorJson [""\"""param";
+	const char* SERIALIZAR_LN5[] = "\"""] = ";
+	const char* PUNTO_Y_COMA[] = ";";
+	int BUFF_SIZE = 250;
+	char* MSJ_NUM_LINE = "Numero de linea en archivo: ";
+	char SERIALIZAR_LN6[] = "string sObjeto=escritor.write(valorJson);";
+	char SERIALIZAR_LN7[] = "xJson* pJson = new xJson(sObjeto);";
+	char SERIALIZAR_LN8[] = "return pJson;";
+	char CORCHETE[] = "}";
+	char DESERIALIZAR_LN1[] = "bool xObject::deserialize(xJson* pJson){";
+	char SERIALIZAR_LN2[] = "Json::Value valorJson;";
+	char DESERIALIZAR_LN3[] = "Json::Reader lector;";
+	char DESERIALIZAR_LN4[] = "bool parsedSuccess = lector.parse(pJson->getString(),valorJson,false);";
+	char DESERIALIZAR_LN5[] = "if(not parsedSuccess){";
+	char DESERIALIZAR_LN6[] = "cout<<FicherosConstants::ERROR_AL_PARSEAR<<endl;";
+	char DESERIALIZAR_LN7[] = "return 1;";
+	char CORCHETE[] = "}";
+	char DESERIALIZAR_LN8[] = "return parsedSuccess;";
+	char CORCHETE[] = "}";
+		
 };
 
 #endif /* FICHEROSCONSTANTS_H_ */
