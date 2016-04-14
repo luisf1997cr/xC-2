@@ -36,6 +36,6 @@ bool pXBool::operator *(){
 
 void pXBool::print(){
 	xPointer::print();
-	cout << "Tamaño: " << this->getPointerSize() << " Valor: " << (*this)->boolValue() << endl;
+	cout << xPointer::SIZE << this->getPointerSize() << xPointer::VALOR << (*this)->boolValue() << endl;
 }
 
