@@ -17,11 +17,11 @@ void Ficheros::leerEnFichero(char pnameArchive[]) {
 			  while(getline(myfile,s)){
 			    cout << s << "\n";
 			}
-			cout << "listo leido"<< endl;
+			cout << FicherosConstants::MSJ_LEIDO<< endl;
 			myfile.close();
 		}
 		else {
-			cout << "No se pudo abrir el archivo: "<< pnameArchive<<endl;
+			cout << FicherosConstants::ERROR_AL_ABRIR<< pnameArchive<<endl;
 		}
 }
 
@@ -31,11 +31,11 @@ void Ficheros::escribirEnFicheroExistente(char pnameArchive[], char pEscribir[])
 
 		if (myfile.is_open()){
 			 myfile << pEscribir<<endl;
-			 cout << "Se escribio"<< endl;
+			 cout << FicherosConstants::MSJ_ESCRITO<< endl;
 			 myfile.close();
 		}
 		else {
-			cout << "No se pudo abrir el archivo";
+			cout << FicherosConstants::ERROR_AL_ABRIR;
 		}
 }
 
@@ -43,11 +43,11 @@ void Ficheros::escribirEnFicheroNuevo(char pnameArchive[], char pEscribir[]) {
 	    ofstream myfile(pnameArchive);
 		if (myfile.is_open()){
 			myfile<<pEscribir;
-			 cout << "Se escribio"<< endl;
+			 cout << FicherosConstants::MSJ_ESCRITO<< endl;
 			 myfile.close();
 		}
 		else {
-			cout << "No se pudo abrir el archivo";
+			cout << FicherosConstants::ERROR_AL_ABRIR;
 		}
 }
 
@@ -57,27 +57,27 @@ bool Ficheros::cadenaDentroDeOtra (char plineadiv[], char pBuscar[])
 	char * pch;
 	pch = strstr(plineadiv, pBuscar);
 	if (pch != NULL){
-		std::cout<<"Si se encuentra"<<std::endl;
+		std::cout<<FicherosConstants::MSJ_ENCONTRADO<<std::endl;
 		return true;
 	}
-	std::cout<<"No se encuentra"<<std::endl;
+	std::cout<<FicherosConstants::MSJ_NO_ENCONTRADO<<std::endl;
 	return false;
 }
 
 char* Ficheros::extraerParametrosInclude (char pline[], int plarge)
 {
-	int i=0;
+	int i=FicherosConstants::NUM_CERO;
 	int y = strlen(pline)-(plarge);
-	static char NuevoCharLine[30];
+	static char NuevoCharLine[FicherosConstants::CHARLINE_SIZE];
 	NuevoCharLine[i] = '"';
 	i++;
 	while(i<y){
 		NuevoCharLine[i] = pline[i];
-		i = i+1;
+		i++;
 	}
-	cout<< "sali" <<endl;
+	cout<< FicherosConstants::MSJ_SALIR <<endl;
 	NuevoCharLine[y] = '"';
-	NuevoCharLine[y+1] = 0;
+	NuevoCharLine[y++] = FicherosConstants::NUM_CERO;
 	return NuevoCharLine;
 
 }
@@ -87,10 +87,10 @@ void Ficheros::leerEnFicheroPrepro(char pnameArchive[], char pBusscar[]) {
 	ifstream myfile(pnameArchive, std::ifstream::in);
 	if (myfile.is_open()){
 		string s;
-		int numLine = 0;
+		int numLine = FicherosConstants::NUM_CERO;
 		LinkedList<char>* listaresult = new LinkedList<char>;
 		while(getline(myfile,s)){
-			numLine = numLine+1;
+			numLine++;
 			char line[s.length()];
 			strcpy(line, s.c_str());
 			if (cadenaDentroDeOtra(line, pBusscar)){
@@ -102,12 +102,12 @@ void Ficheros::leerEnFicheroPrepro(char pnameArchive[], char pBusscar[]) {
 
 				listaresult->insertData(e);
 				//escribirEnFicheroExistente(pnameArchive, e);
-				int i=0;
-				int y = strlen(pnameArchive)-1;
-				static char NuevoCharLine[30];
+				int i=FicherosConstants::NUM_CERO;
+				int y = strlen(pnameArchive)-FicherosConstants::NUM_UNO;
+				static char NuevoCharLine[FicherosConstants::CHARLINE_SIZE];
 				while(i<y){
 					NuevoCharLine[i] = pnameArchive[i];
-					i = i+1;
+					i++;
 				}
 				NuevoCharLine[y] = 'c';
 				NuevoCharLine[y+1] = 'p';
