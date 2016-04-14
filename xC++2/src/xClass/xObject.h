@@ -35,9 +35,18 @@ public:
 	 * @return long int ID
 	 */
 	long int getId();
-
+	
+	/**
+	 * @brief Metodo que serializa los atributos del objeto
+	 * @return xJson* pJson
+	 */
 	xJson* serialize();
 	
+	/**
+	 * @brief Metodo que deserializa el xJson*
+	 * @param xJson* pJson
+	 * @return bool
+	 */
 	bool deserialize(xJson* pJson);
 	
 private:
