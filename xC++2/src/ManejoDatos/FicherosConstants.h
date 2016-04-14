@@ -18,8 +18,8 @@ public:
 	const char* MSJ_NO_ENCONTRADO = "No se encuentra";
 	const char* MSJ_SALIR = "Sali";
 	char COMILLAS = '"';
-	const char* MSJ_ARCHIVO_ENCONTRADO = "Found a File : ";
-	const char* ERROR_AL_ENCONTRAR = "Couldn't open the directory";
+	char* MSJ_ARCHIVO_ENCONTRADO = "Found a File : ";
+	char* ERROR_AL_ENCONTRAR = "Couldn't open the directory";
 	char LETRA_C = 'c';
 	char LETRA_P = 'p';
 	int NUM_CERO = 0;
