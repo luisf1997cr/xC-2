@@ -37,5 +37,5 @@ int pXInt::operator *(){
 
 void pXInt::print(){
 	xPointer::print();
-	cout << "Tamaño: " << this->getPointerSize() << " Valor: " << (*this)->intValue() << endl;
+	cout << xPointer::SIZE << this->getPointerSize() << xPointer::VALOR << (*this)->intValue() << endl;
 }
