@@ -36,5 +36,5 @@ double pXDouble::operator *(){
 
 void pXDouble::print(){
 	xPointer::print();
-	cout << "Tamaño: " << this->getPointerSize() << " Valor: " << (*this)->doubleValue() << endl;
+	cout << xPointer::SIZE << this->getPointerSize() << xPointer::VALOR << (*this)->doubleValue() << endl;
 }
