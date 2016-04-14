@@ -28,9 +28,10 @@ public:
 	char SERIALIZAR_LN1[] = "xJson* xObject::serialize(){";
 	char SERIALIZAR_LN2[] = "Json::Value valorJson;";
 	char SERIALIZAR_LN3[] = "Json::StyledWriter escritor;";
-	const char* SERIALIZAR_LN4[] = "valorJson [""\"""param";
-	const char* SERIALIZAR_LN5[] = "\"""] = ";
-	const char* PUNTO_Y_COMA[] = ";";
+	const char* SERIALIZAR_LN4 = "valorJson [""\"""param";
+	const char* SERIALIZAR_LN5 = "\"""] = ";
+	const char* C_PUNTO_Y_COMA = ";";
+	char PUNTO_Y_COMA[] = ";";
 	int BUFF_SIZE = 250;
 	char* MSJ_NUM_LINE = "Numero de linea en archivo: ";
 	char SERIALIZAR_LN6[] = "string sObjeto=escritor.write(valorJson);";
