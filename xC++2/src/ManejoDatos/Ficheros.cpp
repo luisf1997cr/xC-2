@@ -160,7 +160,7 @@ void Ficheros::leerEnFicheroPrepro(char pnameArchive[], char pBusscar[]) {
 		myfile.close();
 	}
 	else {
-		cout << "No se pudo abrir el archivo: " << pnameArchive<< endl;
+		cout << FicherosConstants::ERROR_AL_ABRIR << pnameArchive<< endl;
 	}
 }
 
@@ -249,7 +249,7 @@ int Ficheros::BuscarArchivosEnFolder (char pSourceDir[],char pBuscar[])
 			strcat(NewSD, pSourceDir);
 			 if ( ep->d_type == isFile)
 			   {
-				cout <<"Found a File : " << ep->d_name << endl;
+				cout <<FicherosConstants::MSJ_ARCHIVO_ENCONTRADO << ep->d_name << endl;
 				leerEnFicheroPrepro((strncat(NewSD, ep->d_name, (sizeof(ep->d_name)))), pBuscar);
 			   }
 		}
