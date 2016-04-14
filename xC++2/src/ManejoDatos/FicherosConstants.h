@@ -17,6 +17,9 @@ public:
 	const char* MSJ_ENCONTRADO = "Si se encuentra";
 	const char* MSJ_NO_ENCONTRADO = "No se encuentra";
 	const char* MSJ_SALIR = "Sali";
+	const char* MSJ_ARCHIVO_ENCONTRADO = "Found a File : ";
+	const char* ERROR_AL_ENCONTRAR = "Couldn't open the directory";
+	const char* MSJ_SALIR = "Sali";
 	const char* MSJ_SALIR = "Sali";
 	const char* MSJ_SALIR = "Sali";
 	const char* MSJ_SALIR = "Sali";
