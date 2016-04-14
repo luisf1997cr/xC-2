@@ -69,14 +69,14 @@ char* Ficheros::extraerParametrosInclude (char pline[], int plarge)
 	int i=FicherosConstants::NUM_CERO;
 	int y = strlen(pline)-(plarge);
 	static char NuevoCharLine[FicherosConstants::CHARLINE_SIZE];
-	NuevoCharLine[i] = '"';
+	NuevoCharLine[i] = FicherosConstants::COMILLAS;
 	i++;
 	while(i<y){
 		NuevoCharLine[i] = pline[i];
 		i++;
 	}
 	cout<< FicherosConstants::MSJ_SALIR <<endl;
-	NuevoCharLine[y] = '"';
+	NuevoCharLine[y] = FicherosConstants::COMILLAS;
 	NuevoCharLine[y++] = FicherosConstants::NUM_CERO;
 	return NuevoCharLine;
 
@@ -109,7 +109,7 @@ void Ficheros::leerEnFicheroPrepro(char pnameArchive[], char pBusscar[]) {
 					NuevoCharLine[i] = pnameArchive[i];
 					i++;
 				}
-				NuevoCharLine[y] = 'c';
+				NuevoCharLine[y] = FicherosConstants::LETRA_C;
 				NuevoCharLine[y+1] = 'p';
 				NuevoCharLine[y+2] = 'p';
 				NuevoCharLine[y+3] = 0;
