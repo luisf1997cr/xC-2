@@ -20,8 +20,8 @@ public:
 	char COMILLAS = '"';
 	const char* MSJ_ARCHIVO_ENCONTRADO = "Found a File : ";
 	const char* ERROR_AL_ENCONTRAR = "Couldn't open the directory";
-	const char LETRA_C = 'c';
-	const char LETRA_P = 'p';
+	char LETRA_C = 'c';
+	char LETRA_P = 'p';
 	int NUM_CERO = 0;
 	int NUM_UNO = 1;
 	int CHARLINE_SIZE = 30;
