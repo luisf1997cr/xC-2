@@ -36,7 +36,7 @@ char pXChar::operator *(){
 
 void pXChar::print(){
 	xPointer::print();
-	cout << "Tamaño: " << this->getPointerSize() << " Valor: " << (*this)->charValue() << endl;
+	cout << xPointer::SIZE << this->getPointerSize() << xPointer::VALOR << (*this)->charValue() << endl;
 }
 
 
