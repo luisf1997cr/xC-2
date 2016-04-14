@@ -141,22 +141,22 @@ void Ficheros::leerEnFicheroPrepro(char pnameArchive[], char pBusscar[]) {
 			escribirEnFicheroExistente(pnameArchive, FicherosConstants::SERIALIZAR_LN6);
 			escribirEnFicheroExistente(pnameArchive, FicherosConstants::SERIALIZAR_LN7);
 			escribirEnFicheroExistente(pnameArchive, FicherosConstants::SERIALIZAR_LN8);
-			escribirEnFicheroExistente(pnameArchive, "}");
-			escribirEnFicheroExistente(pnameArchive, "bool xObject::deserialize(xJson* pJson){");
-			escribirEnFicheroExistente(pnameArchive, "Json::Value valorJson;");
-			escribirEnFicheroExistente(pnameArchive, "Json::Reader lector;");
-			escribirEnFicheroExistente(pnameArchive, "bool parsedSuccess = lector.parse(pJson->getString(),valorJson,false);");
-			escribirEnFicheroExistente(pnameArchive, "if(not parsedSuccess){");
-			escribirEnFicheroExistente(pnameArchive, "cout<<FicherosConstants::ERROR_AL_PARSEAR<<endl;");
-			escribirEnFicheroExistente(pnameArchive, "return 1;");
-			escribirEnFicheroExistente(pnameArchive, "}");
-			escribirEnFicheroExistente(pnameArchive, "return parsedSuccess;");
-			escribirEnFicheroExistente(pnameArchive, "}");
+			escribirEnFicheroExistente(pnameArchive, FicherosConstants::CORCHETE);
+			escribirEnFicheroExistente(pnameArchive, FicherosConstants::DESERIALIZAR_LN1);
+			escribirEnFicheroExistente(pnameArchive, FicherosConstants::SERIALIZAR_LN2);
+			escribirEnFicheroExistente(pnameArchive, FicherosConstants::DESERIALIZAR_LN3);
+			escribirEnFicheroExistente(pnameArchive, FicherosConstants::DESERIALIZAR_LN4);
+			escribirEnFicheroExistente(pnameArchive, FicherosConstants::DESERIALIZAR_LN5);
+			escribirEnFicheroExistente(pnameArchive, FicherosConstants::DESERIALIZAR_LN6);
+			escribirEnFicheroExistente(pnameArchive, FicherosConstants::DESERIALIZAR_LN7);
+			escribirEnFicheroExistente(pnameArchive, FicherosConstants::CORCHETE);
+			escribirEnFicheroExistente(pnameArchive, FicherosConstants::DESERIALIZAR_LN8);
+			escribirEnFicheroExistente(pnameArchive, FicherosConstants::CORCHETE);
 		}
 
 		}
 
-		cout << "listo leido"<< endl;
+		cout << FicherosConstants::MSJ_LEIDO<< endl;
 		myfile.close();
 	}
 	else {
